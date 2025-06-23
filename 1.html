@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>資訊圖表：變動世界中的不變之道</title>
+    <title>Infographic: An Unchanging Way in a Changing World</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Energetic & Playful -->
     <!-- Application Structure Plan: A single-page, vertical scrolling infographic designed as a historical narrative. It begins with a strong thesis statement, then chronologically presents the four technological eras (Printing, Industrial, Internet, AI) as distinct, visually-themed sections. Each section uses a combination of large-number callouts, simple diagrams created with HTML/CSS, and Chart.js visualizations to explain the core concepts. The narrative culminates in a comparative analysis chart and a summary of key principles. This linear storytelling structure makes the complex historical progression easy to follow for the user. -->
     <!-- Visualization & Content Choices: 
@@ -20,7 +20,7 @@
     - All choices confirm to NO SVG / NO MERMAID JS. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #F0F2F5; }
+        body { font-family: 'Noto Sans', sans-serif; background-color: #F0F2F5; }
         .hero-gradient { background: linear-gradient(135deg, #955196, #003F5C); }
         .card { background-color: white; border-radius: 0.75rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); padding: 2rem; }
         h1, h2, h3 { font-weight: 900; }
@@ -33,8 +33,8 @@
     <main class="container mx-auto p-4 md:p-8">
         
         <header class="text-center text-white p-12 rounded-xl hero-gradient mb-12">
-            <h1 class="text-4xl md:text-6xl mb-4">變動世界中的不變之道</h1>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-90">科技革命不僅是工具革新，更是深刻的神學催化劑，迫使教會在每個時代重新審視其使命與身分認同。</p>
+            <h1 class="text-4xl md:text-6xl mb-4">An Unchanging Way in a Changing World</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-90">Technological revolutions are not just tool innovations; they are profound theological catalysts, forcing the Church in every era to re-examine its mission and identity.</p>
         </header>
 
         <section id="timeline" class="space-y-16">
@@ -42,35 +42,35 @@
             <!-- Era 1: Printing Press -->
             <div class="card grid md:grid-cols-2 gap-8 items-center">
                 <div class="text-content">
-                    <span class="text-sm font-bold text-[#955196]">約 1450-1750年</span>
-                    <h2 class="text-3xl md:text-4xl my-2">印刷文字與<br>權威的重構</h2>
-                    <p class="text-gray-600 mb-6">印刷術打破了教會對聖經解釋權的千年壟斷，將「唯獨聖經」從神學原則轉變為信徒可親身實踐的現實，但也開啟了宗派林立的時代。</p>
+                    <span class="text-sm font-bold text-[#955196]">c. 1450-1750</span>
+                    <h2 class="text-3xl md:text-4xl my-2">Printed Word &<br>Reconstruction of Authority</h2>
+                    <p class="text-gray-600 mb-6">The printing press broke the Church's millennia-long monopoly on biblical interpretation, turning "Sola Scriptura" from a theological principle into a tangible reality for believers, but also ushering in an era of denominationalism.</p>
                     <div class="text-center p-6 bg-purple-50 rounded-lg">
                         <span class="text-5xl font-black text-[#955196]">500%</span>
-                        <p class="font-bold mt-2">書籍產量增長</p>
-                        <p class="text-xs text-gray-500">15世紀下半葉相較於上半葉的估計增幅</p>
+                        <p class="font-bold mt-2">Increase in Book Production</p>
+                        <p class="text-xs text-gray-500">Estimated increase in the second half of the 15th century compared to the first half</p>
                     </div>
                 </div>
                 <div class="visualization p-6 bg-gray-50 rounded-lg">
-                    <h3 class="font-bold text-center mb-4">資訊傳播模式的轉變</h3>
+                    <h3 class="font-bold text-center mb-4">Shift in Information Dissemination Model</h3>
                     <div class="space-y-4">
                         <div>
-                            <p class="font-semibold text-center mb-2">印刷術前：中央集權</p>
+                            <p class="font-semibold text-center mb-2">Before Printing: Centralized</p>
                             <div class="flex items-center justify-center space-x-2 text-sm">
-                                <span class="bg-purple-200 p-2 rounded">教會</span>
+                                <span class="bg-purple-200 p-2 rounded">Church</span>
                                 <span class="font-bold text-purple-600 text-2xl">→</span>
-                                <span class="bg-purple-200 p-2 rounded">神職人員</span>
+                                <span class="bg-purple-200 p-2 rounded">Clergy</span>
                                 <span class="font-bold text-purple-600 text-2xl">→</span>
-                                <span class="bg-purple-200 p-2 rounded">信眾</span>
+                                <span class="bg-purple-200 p-2 rounded">Laity</span>
                             </div>
                         </div>
                         <hr class="my-4">
                         <div>
-                            <p class="font-semibold text-center mb-2">印刷術後：去中心化</p>
+                            <p class="font-semibold text-center mb-2">After Printing: Decentralized</p>
                              <div class="flex items-center justify-center space-x-2 text-sm">
-                                <span class="bg-purple-200 p-2 rounded">聖經文本</span>
+                                <span class="bg-purple-200 p-2 rounded">Biblical Text</span>
                                 <span class="font-bold text-purple-600 text-2xl">↔</span>
-                                <span class="bg-purple-200 p-2 rounded">個人信徒</span>
+                                <span class="bg-purple-200 p-2 rounded">Individual Believer</span>
                             </div>
                         </div>
                     </div>
@@ -80,20 +80,20 @@
             <!-- Era 2: Industrial Revolution -->
             <div class="card grid md:grid-cols-2 gap-8 items-center">
                 <div class="visualization">
-                    <h3 class="font-bold text-center mb-4">工業化與社會危機</h3>
+                    <h3 class="font-bold text-center mb-4">Industrialization & Social Crisis</h3>
                      <div class="chart-container">
                         <canvas id="industrialChart"></canvas>
                     </div>
-                    <p class="text-xs text-gray-500 text-center mt-2">示意圖表顯示工業化進程與社會問題指數的關聯性。</p>
+                    <p class="text-xs text-gray-500 text-center mt-2">Schematic chart showing the correlation between industrialization progress and a social problems index.</p>
                 </div>
                 <div class="text-content md:text-right">
-                    <span class="text-sm font-bold text-[#DD5182]">約 1750-1950年</span>
-                    <h2 class="text-3xl md:text-4xl my-2">蒸汽機與<br>社會的重構</h2>
-                    <p class="text-gray-600 mb-6">工業革命帶來的系統性不公，催生了「社會福音」運動，將教會的使命從個人救贖擴展至挑戰不公義的社會結構，關注的焦點是《阿摩司書》中的社會公義。</p>
+                    <span class="text-sm font-bold text-[#DD5182]">c. 1750-1950</span>
+                    <h2 class="text-3xl md:text-4xl my-2">Steam Engine &<br>Reconstruction of Society</h2>
+                    <p class="text-gray-600 mb-6">The systemic injustices brought by the Industrial Revolution gave rise to the "Social Gospel" movement, expanding the Church's mission from individual salvation to challenging unjust social structures, with a focus on social justice as in the Book of Amos.</p>
                      <div class="text-center p-6 bg-pink-50 rounded-lg md:ml-auto max-w-xs">
                         <span class="text-5xl font-black text-[#DD5182]">10X</span>
-                        <p class="font-bold mt-2">城市人口增長</p>
-                        <p class="text-xs text-gray-500">部分西方主要城市在19世紀的增長倍數</p>
+                        <p class="font-bold mt-2">Urban Population Growth</p>
+                        <p class="text-xs text-gray-500">Growth multiple in some major Western cities during the 19th century</p>
                     </div>
                 </div>
             </div>
@@ -101,31 +101,31 @@
             <!-- Era 3: Internet -->
             <div class="card grid md:grid-cols-2 gap-8 items-center">
                 <div class="text-content">
-                    <span class="text-sm font-bold text-[#FF6E54]">約 1990年至今</span>
-                    <h2 class="text-3xl md:text-4xl my-2">互聯網與<br>臨在的重構</h2>
-                    <p class="text-gray-600 mb-6">互聯網，尤其在新冠疫情後，挑戰了教會對「聚集」與「臨在」的根本定義，催生了「混合式教會」與「數位教會論」，核心辯論圍繞《希伯來書》10:25的詮釋。</p>
+                    <span class="text-sm font-bold text-[#FF6E54]">c. 1990-Present</span>
+                    <h2 class="text-3xl md:text-4xl my-2">Internet &<br>Reconstruction of Presence</h2>
+                    <p class="text-gray-600 mb-6">The Internet, especially after the COVID-19 pandemic, challenged the Church's fundamental definitions of "gathering" and "presence," giving rise to "hybrid church" and "digital ecclesiology," with the core debate revolving around the interpretation of Hebrews 10:25.</p>
                      <div class="text-center p-6 bg-orange-50 rounded-lg">
                         <span class="text-5xl font-black text-[#FF6E54]">95%</span>
-                        <p class="font-bold mt-2">教會提供線上崇拜</p>
-                        <p class="text-xs text-gray-500">在COVID-19高峰期，美國教會的估計比例</p>
+                        <p class="font-bold mt-2">of Churches Offered Online Worship</p>
+                        <p class="text-xs text-gray-500">Estimated percentage of U.S. churches during the peak of COVID-19</p>
                     </div>
                 </div>
                  <div class="visualization p-6 bg-gray-50 rounded-lg">
-                    <h3 class="font-bold text-center mb-4">敬拜模式的神學詮釋</h3>
+                    <h3 class="font-bold text-center mb-4">Theological Interpretation of Worship Models</h3>
                      <div class="space-y-4">
                         <div>
-                            <p class="font-semibold text-center mb-2">舊約：固網寬頻模式</p>
+                            <p class="font-semibold text-center mb-2">Old Testament: Fixed-Line Broadband Model</p>
                             <div class="text-center">
                                 <span class="text-5xl">🏛️</span>
-                                <p class="mt-2 text-sm">敬拜需連接至特定地點（聖殿）</p>
+                                <p class="mt-2 text-sm">Worship required connection to a specific location (the Temple)</p>
                             </div>
                         </div>
                         <hr class="my-4">
                         <div>
-                            <p class="font-semibold text-center mb-2">新約：無線網絡模式</p>
+                            <p class="font-semibold text-center mb-2">New Testament: Wireless Network Model</p>
                             <div class="text-center">
                                 <span class="text-5xl">📶</span>
-                                <p class="mt-2 text-sm">透過基督，可在任何地方敬拜</p>
+                                <p class="mt-2 text-sm">Through Christ, worship is possible anywhere</p>
                             </div>
                         </div>
                     </div>
@@ -135,20 +135,20 @@
             <!-- Era 4: Artificial Intelligence -->
              <div class="card grid md:grid-cols-2 gap-8 items-center">
                 <div class="visualization">
-                    <h3 class="font-bold text-center mb-4">AI倫理風險評估</h3>
+                    <h3 class="font-bold text-center mb-4">AI Ethical Risk Assessment</h3>
                      <div class="chart-container">
                         <canvas id="aiRiskChart"></canvas>
                     </div>
-                     <p class="text-xs text-gray-500 text-center mt-2">示意圖表顯示AI在不同倫理面向的潛在風險等級。</p>
+                     <p class="text-xs text-gray-500 text-center mt-2">Schematic chart showing the potential risk levels of AI in different ethical dimensions.</p>
                 </div>
                 <div class="text-content md:text-right">
-                    <span class="text-sm font-bold text-[#FFA600]">現在至未來</span>
-                    <h2 class="text-3xl md:text-4xl my-2">人工智能與<br>人性的重構</h2>
-                    <p class="text-gray-600 mb-6">AI直接叩問人性的本質，迫使教會從被動回應轉向主動建構倫理框架。核心神學回應是重申《創世記》1:27中「上帝的形像」（Imago Dei）的獨特性與尊嚴。</p>
+                    <span class="text-sm font-bold text-[#FFA600]">Present to Future</span>
+                    <h2 class="text-3xl md:text-4xl my-2">Artificial Intelligence &<br>Reconstruction of Humanity</h2>
+                    <p class="text-gray-600 mb-6">AI directly questions the nature of humanity, forcing the Church to shift from a reactive stance to proactively constructing ethical frameworks. The core theological response is to reaffirm the uniqueness and dignity of the "Image of God" (Imago Dei) from Genesis 1:27.</p>
                     <div class="text-center p-6 bg-amber-50 rounded-lg md:ml-auto max-w-xs">
                         <span class="text-5xl font-black text-[#FFA600]">75%</span>
-                        <p class="font-bold mt-2">牧者認為應建立AI倫理準則</p>
-                        <p class="text-xs text-gray-500">根據近期信仰領袖調查的估計</p>
+                        <p class="font-bold mt-2">of Pastors Believe AI Ethical Guidelines Should Be Established</p>
+                        <p class="text-xs text-gray-500">Estimate based on recent surveys of faith leaders</p>
                     </div>
                 </div>
             </div>
@@ -158,45 +158,45 @@
         <!-- Comparative Analysis -->
         <section id="comparison" class="mt-16">
             <div class="card">
-                <h2 class="text-3xl md:text-4xl text-center mb-8">四個時代的挑戰等級比較</h2>
+                <h2 class="text-3xl md:text-4xl text-center mb-8">Comparison of Challenge Levels Across Four Eras</h2>
                 <div class="chart-container" style="height: 450px; max-height: 500px;">
                     <canvas id="comparisonChart"></canvas>
                 </div>
-                <p class="text-xs text-gray-500 text-center mt-4">此圖表將報告中的質化描述轉化為一個示意性的量化比較，以視覺化每次科技革命對教會帶來的挑戰深度。</p>
+                <p class="text-xs text-gray-500 text-center mt-4">This chart transforms the qualitative descriptions from the report into a schematic quantitative comparison to visualize the depth of the challenge posed to the Church by each technological revolution.</p>
             </div>
         </section>
         
         <!-- Conclusion -->
         <section id="conclusion" class="mt-16">
-            <h2 class="text-3xl text-center mb-8">為未來尋求永恆原則</h2>
+            <h2 class="text-3xl text-center mb-8">Seeking Timeless Principles for the Future</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
                 <div class="bg-white p-6 rounded-lg shadow">
                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full" style="background-color: #955196;">
                         <span class="text-white text-2xl">💡</span>
                     </div>
-                    <h3 class="text-lg font-bold my-4">神學的敏捷性</h3>
-                    <p class="text-sm text-gray-600">快速從聖經汲取資源，對新挑戰做出深刻回應。</p>
+                    <h3 class="text-lg font-bold my-4">Theological Agility</h3>
+                    <p class="text-sm text-gray-600">Quickly draw on biblical resources to formulate profound responses to new challenges.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow">
                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full" style="background-color: #DD5182;">
                         <span class="text-white text-2xl">⚖️</span>
                     </div>
-                    <h3 class="text-lg font-bold my-4">倫理的前瞻性</h3>
-                    <p class="text-sm text-gray-600">主動參與塑造科技發展，而非被動反應。</p>
+                    <h3 class="text-lg font-bold my-4">Ethical Foresight</h3>
+                    <p class="text-sm text-gray-600">Proactively participate in shaping technological development rather than passively reacting.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow">
                      <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full" style="background-color: #FF6E54;">
                         <span class="text-white text-2xl">🔍</span>
                     </div>
-                    <h3 class="text-lg font-bold my-4">批判性的明辨力</h3>
-                    <p class="text-sm text-gray-600">區分「使用工具」與「接受其內嵌的意識形態」。</p>
+                    <h3 class="text-lg font-bold my-4">Critical Discernment</h3>
+                    <p class="text-sm text-gray-600">Distinguish between "using a tool" and "adopting its embedded ideology."</p>
                 </div>
                  <div class="bg-white p-6 rounded-lg shadow">
                      <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full" style="background-color: #FFA600;">
                         <span class="text-white text-2xl">⚓</span>
                     </div>
-                    <h3 class="text-lg font-bold my-4">錨定於核心教義</h3>
-                    <p class="text-sm text-gray-600">以道成肉身、上帝的形像等根基衡量新事物。</p>
+                    <h3 class="text-lg font-bold my-4">Anchored in Core Doctrines</h3>
+                    <p class="text-sm text-gray-600">Measure new things against foundational truths like the Incarnation and the Image of God.</p>
                 </div>
             </div>
         </section>
@@ -204,10 +204,10 @@
     </main>
 
     <footer class="text-center p-8 mt-8 text-gray-500 text-sm">
-        <p>基於報告《變動世界中的不變之道》生成此資訊圖表。</p>
+        <p>This infographic was generated based on the report "An Unchanging Way in a Changing World."</p>
     </footer>
 
-    <a href="outline.html" title="回到主頁" class="fixed bottom-8 right-8 bg-gray-800 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-gray-700 transition-colors z-50">
+    <a href="outline.html" title="Back to Main Page" class="fixed bottom-8 right-8 bg-gray-800 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-gray-700 transition-colors z-50">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
         </svg>
@@ -234,14 +234,14 @@
         const industrialData = {
             labels: ['1750', '1800', '1850', '1900', '1950'],
             datasets: [{
-                label: '工業化進程',
+                label: 'Industrialization Progress',
                 data: [10, 25, 50, 75, 90],
                 borderColor: '#DD5182',
                 backgroundColor: 'rgba(221, 81, 130, 0.2)',
                 tension: 0.4,
                 fill: true,
             }, {
-                label: '社會問題指數',
+                label: 'Social Problems Index',
                 data: [5, 20, 60, 80, 65],
                 borderColor: '#444E86',
                 backgroundColor: 'rgba(68, 78, 134, 0.2)',
@@ -249,56 +249,56 @@
                 fill: true,
             }]
         };
-        new Chart(document.getElementById('industrialChart'), {
-            type: 'line',
-            data: industrialData,
-            options: { ...chartTooltipCallback, responsive: true, maintainAspectRatio: false }
-        });
 
         const aiRiskData = {
-            labels: ['演算法偏見', '去人性化', '欺騙與假先知', '隱私與監控', '加劇不公義'],
+            labels: ['Bias & Discrimination', 'Privacy Invasion', 'Dehumanization', 'Misinformation', 'Accountability Gap', 'Theological Distortion'],
             datasets: [{
-                label: '潛在風險等級',
-                data: [7, 8, 9, 8, 7],
-                fill: true,
-                backgroundColor: 'rgba(255, 166, 0, 0.2)',
+                label: 'Potential Risk Level',
+                data: [8, 7, 9, 8, 6, 7],
                 borderColor: '#FFA600',
+                backgroundColor: 'rgba(255, 166, 0, 0.2)',
                 pointBackgroundColor: '#FFA600',
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: '#FFA600'
             }]
         };
-        new Chart(document.getElementById('aiRiskChart'), {
-            type: 'radar',
-            data: aiRiskData,
-            options: { ...chartTooltipCallback, responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10 } } }
-        });
 
         const comparisonData = {
-            labels: ['權威挑戰', '社會結構挑戰', '臨在與社群挑戰', '人性本質挑戰'],
-            datasets: [{
-                label: '印刷術',
-                data: [8, 1, 1, 0],
-                backgroundColor: '#955196',
-            }, {
-                label: '工業革命',
-                data: [2, 9, 3, 2],
-                backgroundColor: '#DD5182',
-            }, {
-                label: '互聯網',
-                data: [5, 4, 9, 4],
-                backgroundColor: '#FF6E54',
-            }, {
-                label: '人工智能',
-                data: [6, 7, 7, 10],
-                backgroundColor: '#FFA600',
-            }]
+            labels: [['Printing Press', 'Authority'], ['Industrial Rev.', 'Society'], ['Internet', 'Presence'], ['AI', 'Humanity']],
+            datasets: [
+                {
+                    label: 'Challenge to Church Structure',
+                    data: [8, 5, 7, 6],
+                    backgroundColor: '#003F5C',
+                },
+                {
+                    label: 'Challenge to Theological Formulation',
+                    data: [6, 8, 9, 9],
+                    backgroundColor: '#7A5195',
+                },
+                {
+                    label: 'Challenge to Pastoral Practice',
+                    data: [4, 7, 8, 9],
+                    backgroundColor: '#EF5675',
+                },
+                 {
+                    label: 'Societal Impact Level',
+                    data: [5, 9, 8, 10],
+                    backgroundColor: '#FFA600',
+                }
+            ]
         };
-        new Chart(document.getElementById('comparisonChart'), {
-            type: 'bar',
-            data: comparisonData,
-            options: { ...chartTooltipCallback, responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 10, title: { display: true, text: '挑戰等級 (1-10)' } } } }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const industrialCtx = document.getElementById('industrialChart').getContext('2d');
+            new Chart(industrialCtx, { type: 'line', data: industrialData, options: { ...chartTooltipCallback, responsive: true, maintainAspectRatio: false } });
+
+            const aiRiskCtx = document.getElementById('aiRiskChart').getContext('2d');
+            new Chart(aiRiskCtx, { type: 'radar', data: aiRiskData, options: { ...chartTooltipCallback, responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10 } } } });
+            
+            const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+            new Chart(comparisonCtx, { type: 'bar', data: comparisonData, options: { ...chartTooltipCallback, responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 10 } } } });
         });
     </script>
 </body>

@@ -1,24 +1,24 @@
-# AI与教会：主题讨论网站
+# AI & The Church: A Discussion Website
 
-该代码仓库包含一个简单的静态网站的源代码，旨在促进关于人工智能及其在教会中作用的讨论。
+This repository contains the source code for a simple static website designed to facilitate a discussion on the topic of Artificial Intelligence and its role in the church.
 
-该网站以链接页面的形式，提出了一系列供反思的问题和主题。
+The website presents a series of questions and topics for reflection, structured as a set of linked pages.
 
-## 如何查看
+## How to View
 
-1.  将此代码仓库克隆到您的本地计算机。
-2.  在您喜欢的网络浏览器中打开 `outline.html` 文件以查看主页。
+1.  Clone this repository to your local machine.
+2.  Open the `outline.html` file in your preferred web browser to view the main page.
 
-## 项目结构
+## Project Structure
 
-网站的主要入口文件是 `outline.html`。在网络浏览器中打开此文件将显示主页，其中包含四个卡片，每个卡片链接到主题的不同方面：
+The main entry point for the website is `outline.html`. Opening this file in a web browser will display the main page with four cards, each linking to a different aspect of the topic:
 
--   `1.html`: **变动世界中的不变之道** - 回顾印刷术、工业革命到网络时代，探讨教会如何持守核心真理，并智慧地回应科技带来的挑战与机遇。
--   `2.html`: **信徒与人工智能** - 从圣经世界观出发，思考"人"的价值、真理的标准与爱的诫命，建立使用AI的具体行动准则与伦理界线。
--   `3.html`: **AI在教会的智慧应用** - 分享AI在行政、关怀、教导和福音预工上的实践案例，发挥其辅助角色，深化真实的人际互动与牧养。
--   `4.html`: **AI信仰智慧问答** - 直接回应关键挑战：AI能否取代牧师？AI写的讲道能用吗？如何分辨AI生成的信息？以圣经原则提供清晰指引。
+-   `1.html`: **An Unchanging Way in a Changing World** - Looking back from the printing press and the Industrial Revolution to the internet age, this section explores how the church can hold fast to core truths while wisely responding to the challenges and opportunities brought by technology.
+-   `2.html`: **Believers and Artificial Intelligence** - Starting from a biblical worldview, this section considers the value of "humanity," the standard of truth, and the commandment to love, establishing practical guidelines and ethical boundaries for the use of AI.
+-   `3.html`: **Wise Applications of AI in the Church** - This section shares practical case studies of AI in administration, care, teaching, and pre-evangelism, highlighting its supporting role in deepening genuine human interaction and pastoral care.
+-   `4.html`: **AI Faith Q&A** - Directly addressing key challenges: Can AI replace pastors? Can sermons written by AI be used? How can we discern AI-generated information? This section provides clear guidance based on biblical principles.
 
-### 其他文件
+### Other Files
 
--   `AIUseCases.csv`: 包含与教会相关的AI用例的数据文件。
--   `use_case.html`: 用于显示AI用例的页面。 
+-   `AIUseCases.csv`: A data file containing AI use cases relevant to the church.
+-   `use_case.html`: A page for displaying the AI use cases. 
