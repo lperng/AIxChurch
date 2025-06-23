@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI在教會的智慧應用圖卡</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #F0F2F5; /* Standardized light gray */
+        }
+        .use-case-card {
+            background: white;
+            border-radius: 1.5rem; /* rounded-2xl */
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0; /* slate-200 */
+        }
+        .use-case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f5f9; /* slate-100 */
+        }
+        .card-icon {
+            flex-shrink: 0;
+            width: 3.5rem; /* w-14 */
+            height: 3.5rem; /* h-14 */
+            border-radius: 9999px; /* rounded-full */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .use-case-list li {
+            position: relative;
+            padding-left: 1.75rem; /* pl-7 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .use-case-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: #FF6E54; /* Standardized accent color */
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .principles-section {
+            margin-top: 1.5rem; /* mt-6 */
+            padding-top: 1.5rem; /* pt-6 */
+            background-color: #f8fafc; /* bg-slate-50 */
+            border-radius: 1rem; /* rounded-xl */
+            padding: 1.25rem; /* p-5 */
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-12">
+
+        <!-- 頁首標題 -->
+        <header class="text-center mb-10 md:mb-16">
+            <h1 class="text-3xl md:text-5xl font-bold text-slate-900 tracking-wide">AI在教會的智慧應用</h1>
+            <p class="text-md md:text-xl text-slate-600 mt-3">在事工、福音與教導中，合乎聖經原則的實踐案例</p>
+        </header>
+
+        <!-- 應用卡片網格 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- 卡片 1: 教會事工運營 -->
+            <div class="use-case-card p-6 md:p-8 flex flex-col">
+                <div class="card-header">
+                    <div class="card-icon text-white" style="background-color: #FF6E54;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 12v-2m0-6h.01M6 12h.01M18 12h.01M6 18h.01M18 6h.01M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">教會事工運營</h2>
+                        <p class="text-slate-500">提升效率，專注牧養</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex-grow">
+                    <h3 class="text-lg font-semibold text-slate-700 mb-4">智慧應用</h3>
+                    <ul class="use-case-list text-slate-600">
+                        <li><b>行政自動化：</b>用AI助理安排會議、發送活動提醒、整理會議記錄。</li>
+                        <li><b>資源智慧化：</b>分析奉獻與開銷數據，提供財務報告與預算建議。</li>
+                        <li><b>活動規劃輔助：</b>根據過往數據，協助規劃大型活動的人力與物資需求。</li>
+                    </ul>
+                </div>
+                
+                <div class="principles-section">
+                    <h4 class="font-bold" style="color: #FF6E54;">原則守則</h4>
+                    <p class="text-sm mt-2"><b>好管家：</b>將同工從繁瑣事務中釋放，更專注於關懷、禱告與建立關係的核心事工。<br><b>愛人如己：</b>自動化不能取代個人化的關懷。對軟弱中的肢體，一句溫暖的問候遠勝制式訊息。</p>
+                </div>
+            </div>
+
+            <!-- 卡片 2: 數位福音策略 -->
+            <div class="use-case-card p-6 md:p-8 flex flex-col">
+                 <div class="card-header">
+                    <div class="card-icon text-white" style="background-color: #FF6E54;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.905 11l.284-2.836A2 2 0 006.015 6h0a2 2 0 00-1.974 1.63L3.055 11m14.975 0l-1.009-10.086A2 2 0 0015.006 0h-5.012a2 2 0 00-1.989.914L7.905 11m5.19 0h.01Z" /></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">數位福音策略</h2>
+                        <p class="text-slate-500">廣傳福音，觸及萬民</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex-grow">
+                    <h3 class="text-lg font-semibold text-slate-700 mb-4">智慧應用</h3>
+                    <ul class="use-case-list text-slate-600">
+                        <li><b>福音內容生成：</b>協助發想社群貼文、短影音腳本，將真理用當代語言表達。</li>
+                        <li><b>跨文化宣教：</b>快速翻譯見證文稿、福音單張，觸及不同語言和文化的群體。</li>
+                        <li><b>慕道友問答：</b>訓練AI針對常見信仰問題提供初步解答，引導他們與信徒展開更深入的對話。</li>
+                    </ul>
+                </div>
+
+                <div class="principles-section">
+                    <h4 class="font-bold" style="color: #FF6E54;">原則守則</h4>
+                    <p class="text-sm mt-2"><b>智慧分辨：</b>所有AI生成內容都須經人工審核，確保神學正確，忠於聖經。最終目的是引人認識基督，而非追求點閱率或網路聲量。<br><b>榮耀神：</b>確保傳遞的內容是純正的真理，而非稀釋的、討好世界的福音。</p>
+                </div>
+            </div>
+            
+            <!-- 卡片 3: 門徒培育輔助 -->
+            <div class="use-case-card p-6 md:p-8 flex flex-col">
+                 <div class="card-header">
+                    <div class="card-icon text-white" style="background-color: #FF6E54;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">門徒培育輔助</h2>
+                        <p class="text-slate-500">深化真理，生命成長</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex-grow">
+                    <h3 class="text-lg font-semibold text-slate-700 mb-4">智慧應用</h3>
+                    <ul class="use-case-list text-slate-600">
+                        <li><b>個人化靈修：</b>依個人屬靈階段與提問，生成客製化的讀經計畫與反思問題。</li>
+                        <li><b>查經資料整理：</b>快速總結特定經文的不同註釋、相關經文與背景，作爲小組長備課材料。</li>
+                        <li><b>講道內容深化：</b>輔助牧者發想講道例證、整理信息大綱，豐富講台信息。</li>
+                    </ul>
+                </div>
+
+                <div class="principles-section">
+                    <h4 class="font-bold" style="color: #FF6E54;">原則守則</h4>
+                    <p class="text-sm mt-2"><b>警醒偶像：</b>AI是「工具」，不能取代聖靈的感動、牧者的教導與屬靈同伴的陪伴。終極的權威永遠是神的話語。<br><b>愛人如己：</b>門徒訓練的核心是生命影響生命的真實關係，而非單向的知識傳遞。</p>
+                </div>
+            </div>
+
+        </div> <!-- end grid -->
+
+        <a href="use_case.html" title="查看所有案例" class="fixed bottom-8 left-8 bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-500 transition-colors z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </a>
+
+    </div>
+
+    <a href="outline.html" title="回到主頁" class="fixed bottom-8 right-8 bg-gray-800 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-gray-700 transition-colors z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+    </a>
+
+</body>
+</html>
+
