@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科技浪潮中的永恆指南針</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan: The SPA is designed as a single, vertical-scrolling narrative infographic, anchored by a central timeline. This structure was chosen to guide the user chronologically through the four technological eras, creating a clear story of challenge and response. Each era is presented as a distinct "card" or section along the timeline, making the information digestible and visually organized. This linear, story-driven approach is more engaging for qualitative, historical content than a tabbed or dashboard layout. -->
+    <!-- Visualization & Content Choices: Report Info: Four technological eras, their core challenges, and corresponding biblical principles. -> Goal: Inform, Organize, and show Change over time. -> Viz/Presentation Method: The primary visualization is a vertical timeline created with structured HTML and styled with Tailwind CSS to represent chronological progression. Each era is a "card" with a title, descriptive text, a prominent blockquote for the scripture, and a Unicode icon (📖, 🚂, 🌐, 🧠) for quick visual association. -> Interaction: Subtle fade-in-on-scroll animations are added via the Intersection Observer API to make the narrative unfold dynamically as the user explores down the page. -> Justification: This design avoids inappropriate quantitative charts (like bar or pie) as the source is purely conceptual. The timeline infographic is a classic and highly effective method for presenting historical or process-based qualitative information, fully adhering to the NO SVG/NO Mermaid JS constraint. -> Library/Method: Vanilla JS for scroll animations, Tailwind CSS for all styling. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f8f9fa; 
+        }
+        .timeline-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .timeline-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-line {
+            background-color: #94d2bd;
+        }
+        .timeline-point {
+            background-color: #005f73;
+            border-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+        
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#005f73]">科技浪潮中的永恆指南針</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">從古騰堡的印刷術到今日的人工智慧，探索教會在四大科技革命中的不變原則與應對智慧。</p>
+        </header>
+
+        <main class="relative mt-16">
+            <div class="timeline-line absolute left-4 sm:left-1/2 w-1 h-full -translate-x-1/2"></div>
+            
+            <div id="timeline-container" class="space-y-16">
+
+                <section class="timeline-item relative">
+                    <div class="absolute left-4 sm:left-1/2 w-8 h-8 rounded-full timeline-point border-4 -translate-x-1/2 mt-3 flex items-center justify-center text-white font-bold">1</div>
+                    <div class="grid grid-cols-12 items-center">
+                        <div class="col-span-12 sm:col-span-5 sm:text-right">
+                             <div class="sm:mr-12 p-1">
+                                <h2 class="text-2xl font-bold text-[#0a9396]">印刷術時代</h2>
+                                <time class="text-sm text-gray-500">約 15 世紀</time>
+                             </div>
+                        </div>
+                        <div class="hidden sm:block sm:col-span-2"></div>
+                        <div class="col-span-12 sm:col-span-5 mt-4 sm:mt-0">
+                             <div class="ml-10 sm:ml-0 bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#0a9396]">
+                                <p class="mb-4 text-gray-600">本節介紹印刷術如何打破知識壟斷，使真理得以廣泛傳播。在資訊可及性大增的時代，教會的核心使命被賦予了全新的實踐動力。</p>
+                                <h3 class="font-bold text-lg mb-2 text-[#005f73]">📖 知識的普及與真理的廣傳</h3>
+                                <blockquote class="mt-4 border-l-4 border-[#94d2bd] pl-4 italic text-gray-700">
+                                    「所以，你們要去，使萬民作我的門徒...凡我所吩咐你們的，都教訓他們遵守。」
+                                    <cite class="block text-right mt-2 not-italic text-sm text-gray-500">－ 馬太福音 28:19-20</cite>
+                                </blockquote>
+                                <p class="mt-4 text-sm leading-relaxed">這節「大使命」的經文，指導教會應當擁抱新科技，將其視為上帝賜予的工具，用以更有效地完成教導萬民的核心使命，積極地將上帝的話語傳入尋常百姓家。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="timeline-item relative">
+                    <div class="absolute left-4 sm:left-1/2 w-8 h-8 rounded-full timeline-point border-4 -translate-x-1/2 mt-3 flex items-center justify-center text-white font-bold">2</div>
+                    <div class="grid grid-cols-12 items-center">
+                        <div class="col-span-12 sm:col-span-5 sm:col-start-8 sm:text-left">
+                              <div class="sm:ml-12 p-1">
+                                <h2 class="text-2xl font-bold text-[#0a9396]">工業革命時代</h2>
+                                <time class="text-sm text-gray-500">約 18-19 世紀</time>
+                              </div>
+                        </div>
+                         <div class="hidden sm:block sm:col-span-2"></div>
+                        <div class="col-span-12 sm:col-span-5 sm:row-start-1 sm:text-right">
+                             <div class="ml-10 sm:mr-12 sm:ml-0 mt-4 sm:mt-0 bg-white p-6 rounded-lg shadow-lg border-r-4 sm:border-r-0 sm:border-l-4 border-[#0a9396]">
+                                 <p class="mb-4 text-gray-600">工業化帶來了劇烈的社會變革，也引發了對勞動價值與人性尊嚴的挑戰。教會在此刻的角色，是成為時代的良心，為公義與憐憫發聲。</p>
+                                <h3 class="font-bold text-lg mb-2 text-[#005f73]">🚂 社會變遷與人性尊嚴</h3>
+                                <blockquote class="mt-4 border-l-4 border-[#94d2bd] pl-4 italic text-gray-700">
+                                    「世人哪，耶和華已指示你何為善...只要你行公義，好憐憫，存謙卑的心，與你的神同行。」
+                                    <cite class="block text-right mt-2 not-italic text-sm text-gray-500">－ 彌迦書 6:8</cite>
+                                </blockquote>
+                                <p class="mt-4 text-sm leading-relaxed">面對社會結構劇變，這節經文呼籲教會超越個人救贖的教導，更要實踐信仰，關懷在變革中受剝削的群體，維護上帝所造每個人的尊嚴。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="timeline-item relative">
+                    <div class="absolute left-4 sm:left-1/2 w-8 h-8 rounded-full timeline-point border-4 -translate-x-1/2 mt-3 flex items-center justify-center text-white font-bold">3</div>
+                    <div class="grid grid-cols-12 items-center">
+                        <div class="col-span-12 sm:col-span-5 sm:text-right">
+                              <div class="sm:mr-12 p-1">
+                                <h2 class="text-2xl font-bold text-[#0a9396]">互聯網時代</h2>
+                                <time class="text-sm text-gray-500">約 20 世紀末</time>
+                              </div>
+                        </div>
+                        <div class="hidden sm:block sm:col-span-2"></div>
+                        <div class="col-span-12 sm:col-span-5 mt-4 sm:mt-0">
+                             <div class="ml-10 sm:ml-0 bg-white p-6 rounded-lg shadow-lg border-l-4 border-[#0a9396]">
+                                <p class="mb-4 text-gray-600">數位連結看似無遠弗屆，卻也衝擊了真實的群體生活。本節探討為何在虛擬社群唾手可得的今天，有血有肉的實體「聚會」反而更顯珍貴。</p>
+                                <h3 class="font-bold text-lg mb-2 text-[#005f73]">🌐 全球連結與真實群體</h3>
+                                <blockquote class="mt-4 border-l-4 border-[#94d2bd] pl-4 italic text-gray-700">
+                                    「你們不可停止聚會，好像那些停止慣了的人，倒要彼此勸勉...就更當如此。」
+                                    <cite class="block text-right mt-2 not-italic text-sm text-gray-500">－ 希伯來書 10:25</cite>
+                                </blockquote>
+                                <p class="mt-4 text-sm leading-relaxed">這句經文是對抗科技帶來孤立化傾向的永恆提醒。它指導教會，必須堅持實體聚集的無可替代性，因為真實的關係與生命建立，發生在真實的同在中。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="timeline-item relative">
+                    <div class="absolute left-4 sm:left-1/2 w-8 h-8 rounded-full timeline-point border-4 -translate-x-1/2 mt-3 flex items-center justify-center text-white font-bold">4</div>
+                    <div class="grid grid-cols-12 items-center">
+                        <div class="col-span-12 sm:col-span-5 sm:col-start-8 sm:text-left">
+                            <div class="sm:ml-12 p-1">
+                                <h2 class="text-2xl font-bold text-[#0a9396]">人工智能時代</h2>
+                                <time class="text-sm text-gray-500">當前與未來</time>
+                            </div>
+                        </div>
+                        <div class="hidden sm:block sm:col-span-2"></div>
+                        <div class="col-span-12 sm:col-span-5 sm:row-start-1 sm:text-right">
+                             <div class="ml-10 sm:mr-12 sm:ml-0 mt-4 sm:mt-0 bg-white p-6 rounded-lg shadow-lg border-r-4 sm:border-r-0 sm:border-l-4 border-[#0a9396]">
+                                <p class="mb-4 text-gray-600">AI正挑戰我們對智慧、創造乃至「人」的定義。面對此根本性問題，教會需回歸創造的起點，宣告人類之所以為人的獨特與尊貴價值。</p>
+                                <h3 class="font-bold text-lg mb-2 text-[#005f73]">🧠 創造力、倫理與人之為人</h3>
+                                <blockquote class="mt-4 border-l-4 border-[#94d2bd] pl-4 italic text-gray-700">
+                                    「神就照著自己的形像造人，乃是照著他的形像造男造女。」
+                                    <cite class="block text-right mt-2 not-italic text-sm text-gray-500">－ 創世記 1:27</cite>
+                                </blockquote>
+                                <p class="mt-4 text-sm leading-relaxed">這節經文是教會在AI時代的信仰基石。它確立人的價值源於「神的形像」——這份靈性、道德與愛的能力，是任何演算法都無法複製的，也為AI的發展設立了服務於人的倫理界線。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <footer class="text-center mt-24 py-8 border-t border-gray-200">
+            <p class="text-gray-500 text-sm">&copy; 2025 · 科技浪潮中的永恆指南針 · 一個基於信仰反思的資訊圖表</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            timelineItems.forEach(item => {
+                observer.observe(item);
+            });
+        });
+    </script>
+
+</body>
+</html>
