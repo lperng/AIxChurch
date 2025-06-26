@@ -20,5 +20,9 @@
 
 ### 其他檔案
 
--   `AIUseCases.csv`: 包含與教會相關的AI用例的資料檔案。
--   `use_case.html`: 用於顯示AI用例的頁面。 
+-   `1-1.html`: **变动世界中的不变之道**的补充内容页面。
+-   `100_use_cases.html`: 显示100个AI用例的综合页面。
+-   `AIUseCases.csv`: 包含与教会相关的AI用例的数据文件。
+-   `use_case.html`: 用于显示AI用例的页面。
+-   `AINEXT2025-ChurchSurvey.pdf`: AI与教会2025年调查报告文档。
+-   `ChatGPTSetting.pdf`: ChatGPT设置指南文档。 
