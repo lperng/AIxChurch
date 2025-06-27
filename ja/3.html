@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教会におけるAIの賢い応用図解カード</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #F0F2F5; /* Standardized light gray */
+        }
+        .use-case-card {
+            background: white;
+            border-radius: 1.5rem; /* rounded-2xl */
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0; /* slate-200 */
+        }
+        .use-case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f5f9; /* slate-100 */
+        }
+        .card-icon {
+            flex-shrink: 0;
+            width: 3.5rem; /* w-14 */
+            height: 3.5rem; /* h-14 */
+            border-radius: 9999px; /* rounded-full */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .use-case-list li {
+            position: relative;
+            padding-left: 1.75rem; /* pl-7 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .use-case-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: #FF6E54; /* Standardized accent color */
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .principles-section {
+            margin-top: 1.5rem; /* mt-6 */
+            padding-top: 1.5rem; /* pt-6 */
+            background-color: #f8fafc; /* bg-slate-50 */
+            border-radius: 1rem; /* rounded-xl */
+            padding: 1.25rem; /* p-5 */
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-12">
+
+        <!-- 页首标题 -->
+        <header class="text-center mb-10 md:mb-16">
+            <h1 class="text-3xl md:text-5xl font-bold text-slate-900 tracking-wide">教会におけるAIの賢い応用</h1>
+            <p class="text-md md:text-xl text-slate-600 mt-3">ミニストリー、福音宣教、教育における聖書的原則に基づいた実践事例</p>
+        </header>
+
+        <!-- 应用卡片网格 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- 卡片 1: 教会事工运营 -->
+            <div class="use-case-card p-6 md:p-8 flex flex-col">
+                <div class="card-header">
+                    <div class="card-icon text-white" style="background-color: #FF6E54;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 12v-2m0-6h.01M6 12h.01M18 12h.01M6 18h.01M18 6h.01M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">教会ミニストリー運営</h2>
+                        <p class="text-slate-500">効率を高め、牧会に集中</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex-grow">
+                    <h3 class="text-lg font-semibold text-slate-700 mb-4">賢い応用</h3>
+                    <ul class="use-case-list text-slate-600">
+                        <li><b>管理業務の自動化：</b>AIアシスタントを使い、会議のスケジュール調整、イベントリマインダーの送信、議事録の整理を行う。</li>
+                        <li><b>リソースのスマート化：</b>献金と支出データを分析し、財務報告と予算案を提供する。</li>
+                        <li><b>イベント企画支援：</b>過去のデータに基づき、大規模イベントの人員と物資の需要計画を支援する。</li>
+                    </ul>
+                </div>
+                
+                <div class="principles-section">
+                    <h4 class="font-bold" style="color: #FF6E54;">原則の遵守</h4>
+                    <p class="text-sm mt-2"><b>良き管理者：</b>同労者を煩雑な業務から解放し、ケア、祈り、関係構築という核心的なミニストリーにさらに集中させる。<br><b>隣人愛：</b>自動化は個人的なケアを代替できない。弱い立場にある兄弟姉妹には、定型的なメッセージよりも温かい一言がはるかに重要である。</p>
+                </div>
+            </div>
+
+            <!-- 卡片 2: 数字福音策略 -->
+            <div class="use-case-card p-6 md:p-8 flex flex-col">
+                 <div class="card-header">
+                    <div class="card-icon text-white" style="background-color: #FF6E54;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.905 11l.284-2.836A2 2 0 006.015 6h0a2 2 0 00-1.974 1.63L3.055 11m14.975 0l-1.009-10.086A2 2 0 0015.006 0h-5.012a2 2 0 00-1.989.914L7.905 11m5.19 0h.01Z" /></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">デジタル福音戦略</h2>
+                        <p class="text-slate-500">福音を広め、万民に届ける</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex-grow">
+                    <h3 class="text-lg font-semibold text-slate-700 mb-4">賢い応用</h3>
+                    <ul class="use-case-list text-slate-600">
+                        <li><b>福音コンテンツ生成：</b>SNS投稿やショート動画の脚本のアイデアを助け、真理を現代の言葉で表現する。</li>
+                        <li><b>異文化宣教：</b>証しの原稿や福音チラシを迅速に翻訳し、異なる言語や文化のグループにアプローチする。</li>
+                        <li><b>求道者の質問応答：</b>よくある信仰の質問に対して初歩的な回答を提供するAIを訓練し、信者とのより深い対話に導く。</li>
+                    </ul>
+                </div>
+
+                <div class="principles-section">
+                    <h4 class="font-bold" style="color: #FF6E54;">原則の遵守</h4>
+                    <p class="text-sm mt-2"><b>賢い識別：</b>AIが生成したすべてのコンテンツは、神学的に正しく、聖書に忠実であることを確認するために、人間による監査が必要である。最終的な目的は、クリック数やネットでの評判を追求することではなく、人々をキリストに導くことである。<br><b>神に栄光を帰す：</b>伝える内容が、希薄化され、世に迎合した福音ではなく、純粋な真理であることを保証する。</p>
+                </div>
+            </div>
+            
+            <!-- 卡片 3: 门徒培育辅助 -->
+            <div class="use-case-card p-6 md:p-8 flex flex-col">
+                 <div class="card-header">
+                    <div class="card-icon text-white" style="background-color: #FF6E54;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">弟子訓練の補助</h2>
+                        <p class="text-slate-500">真理を深め、霊的に成長する</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex-grow">
+                    <h3 class="text-lg font-semibold text-slate-700 mb-4">賢い応用</h3>
+                    <ul class="use-case-list text-slate-600">
+                        <li><b>個人化されたディボーション：</b>個人の霊的段階や質問に応じて、カスタマイズされた聖書読書計画と反省の問いを生成する。</li>
+                        <li><b>聖書研究資料の整理：</b>特定の聖句に関する異なる注釈、関連聖句、背景を迅速に要約し、小グループリーダーの準備資料として提供する。</li>
+                        <li><b>説教内容の深化：</b>牧師が説教の例話を発想し、メッセージの概要を整理するのを助け、講壇のメッセージを豊かにする。</li>
+                    </ul>
+                </div>
+
+                <div class="principles-section">
+                    <h4 class="font-bold" style="color: #FF6E54;">原則の遵守</h4>
+                    <p class="text-sm mt-2"><b>偶像崇拝への警戒：</b>AIは「ツール」であり、聖霊の感動、牧師の教え、霊的な仲間の交わりを代替することはできない。究極の権威は常に神の言葉である。<br><b>隣人愛：</b>弟子訓練の核心は、一方的な知識伝達ではなく、人生が人生に影響を与える真の関係である。</p>
+                </div>
+            </div>
+
+        </div> <!-- end grid -->
+
+        <a href="use_case.html" title="すべてのケースを見る" class="fixed bottom-8 left-8 bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-500 transition-colors z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </a>
+
+    </div>
+
+    <a href="outline.html" title="ホームページに戻る" class="fixed bottom-8 right-8 bg-gray-800 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-gray-700 transition-colors z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+    </a>
+
+</body>
+</html>
+

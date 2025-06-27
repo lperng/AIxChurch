@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wise Applications of AI in the Church - Use Case Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #F0F2F5; /* Standardized light gray */
+        }
+        .use-case-card {
+            background: white;
+            border-radius: 1.5rem; /* rounded-2xl */
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0; /* slate-200 */
+        }
+        .use-case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f5f9; /* slate-100 */
+        }
+        .card-icon {
+            flex-shrink: 0;
+            width: 3.5rem; /* w-14 */
+            height: 3.5rem; /* h-14 */
+            border-radius: 9999px; /* rounded-full */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .use-case-list li {
+            position: relative;
+            padding-left: 1.75rem; /* pl-7 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .use-case-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: #FF6E54; /* Standardized accent color */
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .principles-section {
+            margin-top: 1.5rem; /* mt-6 */
+            padding-top: 1.5rem; /* pt-6 */
+            background-color: #f8fafc; /* bg-slate-50 */
+            border-radius: 1rem; /* rounded-xl */
+            padding: 1.25rem; /* p-5 */
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-12">
+
+        <!-- Header -->
+        <header class="text-center mb-10 md:mb-16">
+            <h1 class="text-3xl md:text-5xl font-bold text-slate-900 tracking-wide">Wise Applications of AI in the Church</h1>
+            <p class="text-md md:text-xl text-slate-600 mt-3">Biblically-Grounded Use Cases in Ministry, Evangelism, and Discipleship</p>
+        </header>
+
+        <!-- Use Case Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Card 1: Church Ministry Operations -->
+            <div class="use-case-card p-6 md:p-8 flex flex-col">
+                <div class="card-header">
+                    <div class="card-icon text-white" style="background-color: #FF6E54;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 12v-2m0-6h.01M6 12h.01M18 12h.01M6 18h.01M18 6h.01M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Ministry Operations</h2>
+                        <p class="text-slate-500">Boost Efficiency, Focus on People</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex-grow">
+                    <h3 class="text-lg font-semibold text-slate-700 mb-4">Wise Applications</h3>
+                    <ul class="use-case-list text-slate-600">
+                        <li><b>Administrative Automation:</b> Use an AI assistant to schedule meetings, send event reminders, and summarize meeting notes.</li>
+                        <li><b>Resource Intelligence:</b> Analyze donation and expense data to provide financial reports and budget suggestions.</li>
+                        <li><b>Event Planning Support:</b> Assist in planning staffing and material needs for large events based on past data.</li>
+                    </ul>
+                </div>
+                
+                <div class="principles-section">
+                    <h4 class="font-bold" style="color: #FF6E54;">Guiding Principles</h4>
+                    <p class="text-sm mt-2"><b>Good Stewardship:</b> Free up staff from tedious tasks to focus on the core ministry of care, prayer, and relationship-building.<br><b>Love Your Neighbor:</b> Automation cannot replace personal care. For a member in need, a warm greeting is far better than a form message.</p>
+                </div>
+            </div>
+
+            <!-- Card 2: Digital Evangelism Strategy -->
+            <div class="use-case-card p-6 md:p-8 flex flex-col">
+                 <div class="card-header">
+                    <div class="card-icon text-white" style="background-color: #FF6E54;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h1a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.905 11l.284-2.836A2 2 0 006.015 6h0a2 2 0 00-1.974 1.63L3.055 11m14.975 0l-1.009-10.086A2 2 0 0015.006 0h-5.012a2 2 0 00-1.989.914L7.905 11m5.19 0h.01Z" /></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Digital Evangelism</h2>
+                        <p class="text-slate-500">Spread the Gospel, Reach All People</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex-grow">
+                    <h3 class="text-lg font-semibold text-slate-700 mb-4">Wise Applications</h3>
+                    <ul class="use-case-list text-slate-600">
+                        <li><b>Content Generation:</b> Help brainstorm social media posts and short video scripts to express truth in contemporary language.</li>
+                        <li><b>Cross-Cultural Missions:</b> Quickly translate testimonies and gospel tracts to reach different language and cultural groups.</li>
+                        <li><b>Seeker Q&A:</b> Train an AI to provide initial answers to common faith questions, guiding them into deeper conversations with believers.</li>
+                    </ul>
+                </div>
+
+                <div class="principles-section">
+                    <h4 class="font-bold" style="color: #FF6E54;">Guiding Principles</h4>
+                    <p class="text-sm mt-2"><b>Wise Discernment:</b> All AI-generated content must be manually reviewed for theological accuracy and faithfulness to Scripture. The goal is to lead people to Christ, not to chase clicks or online fame.<br><b>Glorify God:</b> Ensure the message conveyed is pure truth, not a diluted, world-pleasing gospel.</p>
+                </div>
+            </div>
+            
+            <!-- Card 3: Discipleship Support -->
+            <div class="use-case-card p-6 md:p-8 flex flex-col">
+                 <div class="card-header">
+                    <div class="card-icon text-white" style="background-color: #FF6E54;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-800">Discipleship Support</h2>
+                        <p class="text-slate-500">Deepen Truth, Grow in Life</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex-grow">
+                    <h3 class="text-lg font-semibold text-slate-700 mb-4">Wise Applications</h3>
+                    <ul class="use-case-list text-slate-600">
+                        <li><b>Personalized Devotions:</b> Generate custom reading plans and reflection questions based on an individual's spiritual stage and inquiries.</li>
+                        <li><b>Study Material Prep:</b> Quickly summarize different commentaries, related verses, and background for a specific passage as prep material for small group leaders.</li>
+                        <li><b>Sermon Enrichment:</b> Assist pastors in brainstorming sermon illustrations and organizing message outlines to enrich the pulpit message.</li>
+                    </ul>
+                </div>
+
+                <div class="principles-section">
+                    <h4 class="font-bold" style="color: #FF6E54;">Guiding Principles</h4>
+                    <p class="text-sm mt-2"><b>Beware of Idolatry:</b> AI is a "tool" and cannot replace the Holy Spirit's guidance, a pastor's teaching, or the companionship of spiritual peers. The ultimate authority is always God's Word.<br><b>Love Your Neighbor:</b> The core of discipleship is the real, life-on-life relationship, not a one-way transfer of knowledge.</p>
+                </div>
+            </div>
+
+        </div> <!-- end grid -->
+
+        <a href="use_case.html" title="View All Use Cases" class="fixed bottom-8 left-8 bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-500 transition-colors z-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </a>
+
+    </div>
+
+    <a href="outline.html" title="Back to Main Page" class="fixed bottom-8 right-8 bg-gray-800 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-gray-700 transition-colors z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+    </a>
+
+</body>
+</html>
+

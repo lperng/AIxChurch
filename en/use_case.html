@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Use Cases for the Church</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .use-case-card {
+            background: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-left: 5px solid #3498db;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .use-case-card h3 {
+            margin-top: 0;
+            color: #2980b9;
+        }
+        .details, .prompt {
+            margin-top: 10px;
+        }
+        .details b, .prompt b {
+            color: #7f8c8d;
+        }
+        pre {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: "Courier New", Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Use Cases for the Church</h1>
+        <div id="use-cases-container"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const csvData = `Category,Use Case,Detailed Description,Prompt Template
+Content Creation & Media,1. Sermon Theme & Outline Generation,"Based on scripture, seasons, or current events, AI automatically generates diverse sermon themes and outline suggestions.","You are a senior theological research assistant. Based on the scripture 'Romans 12:1-2' and the current social issue of 'youth burnout,' please provide 3 different sermon titles and three-point outlines for this Sunday's message. The style should be both theologically deep and practically relevant."
+,2. Weekly Verse Card Design,"Automatically designs the weekly verse into beautiful cards suitable for sharing on social media platforms like WeChat Moments, Xiaohongshu, or in church groups.","(To an image generation AI) Generate a card (9:16 vertical) suitable for sharing on WeChat Moments. The background should be a warm wheat field, realistic and bright. In the center, write the verse 'Let your light shine before others' in an elegant simplified Chinese Song typeface. In the bottom right corner, add the reference 'Matthew 5:16' in a smaller font."
+,3. Worship Song Inspiration,"AI helps generate chord progressions, melodic motifs, or lyrics for specific themes for the worship team to reference.","I am writing a song about 'mission' for the church's youth fellowship, in a style similar to 'Stream of Praise' or 'Lamb Music.' Please provide three different chord progressions and write a draft of two verses and a chorus based on the core image of 'go out and be a light'."
+,4. Transcribing Personal Testimonies,"Converts a member's spoken testimony (from audio recording or scattered text) into a coherent written manuscript suitable for sharing in a service.","Please transcribe this 10-minute audio testimony into text and rewrite it into an approximately 800-word manuscript. Please retain the core touching details and streamline the narrative logic to make it more impactful and suitable for reading during a Sunday service."
+,5. Holiday Event Planning,"For major holidays like Christmas and Easter, AI provides creative event plans, flow designs, and promotional copy.","Plan a 'Community Open House' event for our church in Jing'an District, Shanghai. Please provide three creative themes, and for one of them, design a detailed plan including a schedule, logistics checklist, and a WeChat public account article."
+,6. Bible Story Short Video Scripts,"Generates short video scripts for Bible stories for children's Sunday school, suitable for platforms like Douyin or WeChat Channels.","Write a 60-second short video script about the 'Good Samaritan' for 5-8 year old children. Please use simple, rhyming dialogue and describe 5 key camera shots, along with suggestions for background music and sound effects to make it lively and fun."
+,7. Podcast/Audio Program Planning,"Assists in planning topics, interview questions, and content flow for audio programs, and automatically generates summaries and transcripts.","Plan a Christian life podcast called 'Walking on the Way.' The first episode's topic is 'How to handle faith differences in the family.' Please list 5 in-depth interview questions for the guest, write the opening and closing scripts, and compose a 300-word WeChat post for this episode."
+,8. Writing Public Prayers & Blessings,"Drafts appropriate public prayers or blessings for various occasions (e.g., memorials, commissioning, praying for the city).","Please write a commissioning prayer for several young brothers and sisters who are about to leave for university. The prayer should include blessings for their studies, new life adaptation, and spiritual growth, and quote the scripture 'The LORD himself goes before you'."
+,9. WeChat Article Formatting & Beautification,"Based on the article's content, AI recommends layout styles, images, and headlines to improve the reading experience.","I've written an article on 'How to Read the Bible.' Please act as a senior WeChat editor, provide three engaging titles for this article, suggest 5 places to insert images with content descriptions, and optimize paragraph spacing and styling for key text."
+,10. Digitizing & Indexing Historical Archives,"Digitizes the church's historical materials, old photos, and meeting minutes, and uses AI to generate summaries and keyword indexes.","Analyze this uploaded PDF document of the church's 30-year history. Generate an 800-word summary and list 15 of the most important keywords (including names, significant events, development stages) for future retrieval."
+,11. Internal Giving Report Design,"Designs templates for internal giving reports that are clear, transparent, and full of gratitude.","Design a monthly giving report PowerPoint template (16:9) for the church. The style should be formal and grateful. Pages should include: an overview page (with charts), an expense analysis page by ministry, a special giving project progress page, and a thanksgiving sharing page. Please provide design suggestions."
+,12. Gospel Micro-Film Scriptwriting,"Creates micro-film scripts suitable for screening on Bilibili (B-station) or at gospel camps.","Write a 10-minute micro-film script. The story is set in Shenzhen, and the protagonist is a programmer facing a '35-year-old crisis.' The plot should reflect the anxiety and struggles of contemporary professionals and, through a turning point, lead him to contemplate the ultimate meaning of life. Please provide character bios, a story outline, and the first three minutes of the script."
+Education & Training,13. Personalized Devotional Material Delivery,"Based on a believer's spiritual stage and recent struggles, AI delivers personalized daily scriptures, meditations, and prayer guides via WeChat.","Design a seven-day devotional plan for a new believer who has been in the faith for one year and works in a professional setting. His struggle is with interpersonal relationships. Please provide a relevant scripture, a 200-word meditation guide, 2 reflection questions, and a short prayer for daily delivery via WeChat."
+,14. Faith Q&A Intelligent Knowledge Base,"Builds an AI knowledge base that can instantly answer common questions about the Bible, theology, apologetics, etc.","From historical, theological, and exegetical perspectives, comprehensively analyze and answer the question 'Are predestination and free will contradictory?' Please list the main views of Augustine, Calvin, and Arminius, and provide a balanced application suggestion for lay believers."
+,15. Sunday School/Small Group Study Prep,"Automatically generates complete lesson prep materials including background introduction, scripture analysis, discussion questions, and application.","Design a 60-minute lesson for an adult Sunday school class studying 'Ephesians 4:1-16.' The prep material needs to include: 1. Background introduction to the text; 2. Verse-by-verse key point analysis; 3. 5 in-depth small group discussion questions; 4. 2 personal life application challenges."
+,16. Summaries of Theological Books & Lectures,"Quickly generates summaries of core arguments from lengthy theological books or overseas lecture videos (with subtitles).","Please summarize the first part of Timothy Keller's book 'Every Good Endeavor' into a 1000-word summary, and analyze his proposed framework of 'Creation, Fall, Redemption' for work."
+,17. Volunteer/Co-worker Pre-service Training,"Creates simulated scenarios where new volunteers can learn how to welcome newcomers, make caring phone calls, etc., through role-playing with an AI.","You are now playing the role of a community resident who has some misunderstandings and a slightly resistant attitude towards the church. I will play the role of a church volunteer and practice how to communicate with you in a friendly and wise manner. Please give me specific feedback and suggestions for improvement after our interaction."
+,18. Original Biblical Language Learning Aid,"Provides the original Hebrew/Greek text of scriptures, Romanization, parsing (word analysis), and concordance functions.","Please analyze the original Hebrew text of 'Genesis 1:1.' List each word's original form, transliteration, and direct Chinese translation. Also, provide a detailed explanation of the verb 'בָּרָא' (bara), its parsing, and its usage in the Old Testament."
+,19. Systematized Discipleship Management,"Creates learning paths for discipleship courses. Based on student-submitted assignments and reflections, AI provides personalized feedback and supplementary materials.","Student B mentioned in his sharing on 'forgiveness' that he knows he should forgive but just can't bring himself to do it. Based on this feedback, please provide him with three concrete practical exercises and recommend an article on 'the deep healing of forgiveness'."
+,20. Interactive Faith Exploration Course,"Designs an H5 or WeChat mini-program for seekers to explore core faith concepts through interactive Q&A and scenario choices.","Design an H5 interactive page: it starts with the question 'If life is a journey, what do you value most?' with three options: 'The scenery along the way,' 'The people you travel with,' and 'The final destination.' Based on the user's choice, lead them down different paths of faith reflection and scripture."
+Communication & Care,21. Smart Care & Prayer Request Bot,"In a WeChat group or mini-program, a bot can collect prayer requests 24/7, offer initial comfort, and alert co-workers to intervene when necessary.","(Backend setting) You are the church's prayer assistant 'Enoch.' When a group member sends 'Please pray for my mom's health,' you automatically reply: 'Your prayer request has been received. We will pray together for you and your mom. May the Lord grant peace and healing. 'The LORD is my shepherd; I shall not want'.'"
+,22. Automated Newcomer Welcome Process,"After a newcomer leaves their contact information, AI automatically triggers a series of welcome messages, church introductions, and event invitations via WeCom.","Design a three-week WeCom welcome flow for church newcomers. The first message is sent one day after registration, with the subject 'Welcome Home!' and a link to a welcome video from the pastor. The second message is sent a week later, introducing small group life. The third invites them to an online newcomer's orientation. Please write the copy for these three messages."
+,23. Sensing Member's Spiritual State,"By analyzing (anonymous) prayer requests and group chat content, understand the recent common struggles and spiritual needs of the congregation.","Analyze this anonymous text record from the church's prayer wall. Categorize the content into: health, work, family, studies, spiritual life, etc. Please calculate the percentage of each category and summarize the three most prominent common spiritual needs recently, so that pastors can respond in their sermons and care."
+,24. Drafting Personalized Care Messages,"A care worker inputs the situation of the person being visited, and AI helps draft a warm and truth-filled WeChat message of comfort.","Please write a 500-word WeChat care message for a brother (Li Yang) who recently lost his job. In the message, please quote the scripture from 'Matthew 6:26' about the birds of the air, encourage him to trust in the Heavenly Father's provision, and express the church's willingness to provide practical help at any time."
+,25. "Lurking" Member Care Reminders,"Based on a member's activity level in WeChat groups and service attendance, AI automatically flags "lurking" or disengaging members who may need follow-up care.","(For internal data analysis) From the WeChat group chat records and online service sign-ins of the past two months, please filter out a list of members who were 'previously active but have had no posts or sign-ins in the last month.' Categorize them by their small group for follow-up."
+,26. WeChat Group Message Auto-Summary,"AI automatically summarizes important notices, prayer requests, and insightful shares from a WeChat group into a daily digest.","Please automatically fetch all chat records from the 'Co-worker Exchange Group' from 2 PM yesterday to the present. Extract all notices and arrangements regarding the 'Saturday Community Service Event,' organize them into a clear summary, and send it to the group at 9 AM this morning."
+,27. Crisis Communication Templates,"When a public emergency or internal crisis occurs, AI can quickly provide templates for internal and external statements or notifications.","In response to a severe weather alert (e.g., heavy rain) issued by the government, this week's physical service may need to be canceled. Please draft an internal notice (for the WeChat group) and a more formal public announcement (for the public account) explaining the potential changes."
+,28. Smart Visitor Feedback Organization,"Quickly organizes a co-worker's visit recordings or handwritten notes into a structured visit report for archiving and follow-up.","Please organize this 5-minute audio note about visiting Grandma Zhang into a visit report. The report needs to include: 1. Date of visit; 2. Visitee's physical and mental condition; 3. Main prayer needs; 4. Suggestions for the next follow-up."
+Administration & Management,29. Giving Data Analysis & Reporting,"Analyzes historical giving data and generates internal financial reports to help co-workers understand financial health and giving trends.","Analyze this anonymous giving data Excel sheet. Please generate a report that includes: 1. A monthly total giving trend chart for the past year. 2. A pie chart showing the percentage of giving to various ministries (e.g., charity, missions). 3. Identify and explain possible reasons for months with significant increases or decreases in giving."
+,30. Smart Scheduling for Venues & Resources,"Based on event requests, AI automatically schedules venues and equipment usage, predicts conflicts, and suggests optimal solutions.","'I have three event requests: Event A (Fri evening, 50 people, needs projector), Event B (Sat morning, 20 people, needs whiteboard), Event C (Sat evening, 100 people, needs sound system). Please provide an optimal, conflict-free schedule based on our venue list (main hall, fellowship hall, small meeting room).'"
+,31. Matching Volunteer Gifts to Positions,"Based on a volunteer's self-assessed gifts, interests, and availability, AI recommends the most suitable service positions for them.","Based on this 'Volunteer Gifts and Skills Survey Form,' please recommend three of the most suitable volunteers for the 'Children's Sunday School Assistant Teacher' and 'Worship PPT Operator' positions, and briefly state the reasons for your recommendation."
+,32. Event Registration & Attendance Prediction,"Combining historical data with current registration numbers, predict the final attendance for an event to prepare materials accordingly.","We are hosting a 'Marriage Relationship' seminar, and 80 people have registered so far. Based on the average 30% no-show rate for similar past seminars, please predict the actual attendance range for this seminar and suggest how many sets of materials we need to prepare."
+,33. Meeting Transcription & Minutes,"AI transcribes meeting audio to text in real-time and automatically generates a summary, to-do list, and list of resolutions after the meeting.","Please transcribe this 60-minute co-worker meeting recording into a text manuscript. Once completed, please generate a summary, list all resolutions, and for each resolution, list the responsible person and the deadline (To-do List)."
+,34. Price Comparison & Shopping List Generation,"When office supplies or event materials need to be purchased, AI can compare prices on platforms like Taobao and JD.com and generate purchasing suggestions.","We need to purchase 100 craft kits for a children's summer camp, with a budget of under 15 RMB per kit. Please search for qualifying products on Taobao and Pinduoduo, find 3 reputable and well-priced stores, and present a comparison of their prices, material contents, and user reviews in a table."
+,35. Smart Scheduling System,"For Sunday services, prayer meetings, etc., automatically generates a fair and reasonable schedule based on rules and individual preferences.","Please create a schedule for next month's worship team. There are 8 members (4 lead vocalists, 2 guitarists, 1 keyboardist, 1 drummer). Each week requires 4 people to serve (2 lead vocalists, 1 guitarist, 1 keyboardist/drummer alternating). Rules: 1. Each person can serve a maximum of 2 times. 2. Vocalist A and B should not be scheduled together if possible. Please generate a four-week schedule."
+,36. Preliminary Financial Statement Generation,"Automatically generates draft monthly or quarterly financial statements that comply with internal standards from a simple income/expense log (Excel).","Based on the July income and expense log Excel file I've uploaded, please automatically generate a draft monthly financial report for the church. It should include total income, total expenses, a classified summary of income and expense items, and the ending balance."
+Community Service & Outreach,37. Community Needs Analysis & Insights,"Analyzes public data or news from a local area (e.g., Tianhe District, Guangzhou) to identify specific community needs to guide service direction.","Analyze recent news reports and policy documents on 'migrant children's education in Guangzhou.' Summarize the three main difficulties this group currently faces and propose two feasible entry points for church community service (e.g., weekend homework tutoring, interest classes)."
+,38. Writing Copy for Charity Events,"Writes recruitment or promotional copy for community service events (e.g., environmental protection, elder care, student aid) for WeChat groups and public accounts.","We plan to hold a 'Love in Golden Autumn' community event for the elderly on the Double Ninth Festival and need to recruit 20 volunteers. Please write a WeChat public account post that is touching and has a strong call to action, detailing the event content, volunteer requirements, and registration method."
+,39. Finding Community Partners,"AI searches for and organizes a list of potential partner organizations around the church on Baidu Maps or Gaode Maps.","Please search on Baidu Maps and compile a list of all 'community service centers,' 'sub-district offices,' and 'nursing homes' within 3 kilometers of our church (address: xx Road, Chaoyang District, Beijing). The list should include names, addresses, and contact numbers (if any) as potential community service partners."
+,40. Analyzing WeChat Article Performance,"Analyzes the reading, sharing, and liking data of public account articles to provide optimization suggestions for future content strategy.","Analyze the data of all articles from our public account over the past three months (reads, shares, likes, comments). Please identify the top 3 most-read articles, analyze their common features (e.g., topic, title, layout), and provide three specific suggestions for our next phase of content direction."
+,41. Community Service Mapping,"Visualizes the church's community service points, care-receiving family distributions, etc., on a map.","Based on this Excel sheet containing addresses (for our church's 'Love Lunch' distribution points), please use the Baidu Maps API or a similar tool to generate a service point distribution map so we can evaluate our service coverage."
+,42. Smart Legal & Regulatory Consultation,"Provides preliminary legal and regulatory information for reference on religious affairs, non-profit organization registration, holding public welfare events, etc.","I want to understand the regulations regarding religious affairs when holding a public, cultural exchange-oriented event for the community in mainland China. Please provide a preliminary overview and key considerations based on publicly available information."
+,43. Cross-Cultural Material Research,"For co-workers preparing to serve in ethnic minority areas or overseas, quickly compiles an overview of the local culture, customs, taboos, and religious landscape.","I am preparing for a cultural exchange trip to an ethnic minority region in Yunnan. Please provide a cultural background report on this ethnic group (e.g., the Lisu people), including: 1. Traditional customs and festivals; 2. Social etiquette and taboos; 3. Main religious beliefs; 4. Suggestions for building trust with the local people."
+,44. Online Seeker Follow-up Assistance,"Based on questions raised by seekers online, AI automatically matches them with suitable follow-up materials or resources.","A seeker asked online: 'I find it hard to believe in a God I can't see.' Please provide a response framework for the follow-up worker and recommend two relevant apologetics articles and a video testimony of a personal experience."
+,45. Social Media Public Opinion Monitoring,"Monitors public discussions about Christianity or the church on mainstream social media platforms (like Weibo, Zhihu) to understand public perception.","Monitor the highly-rated answers on Zhihu over the past month on topics like 'Christians' or 'church life.' Please summarize three mainstream positive or negative perceptions and analyze the reasons behind them."
+,46. Life Growth Card Design,"Designs 'Life Growth' or 'Spiritual Care' cards suitable for sharing on WeChat, with content that is gentle and universally applicable.","Design a set of five 'Spiritual Breathing' WeChat cards. Each card should contain a wise saying from the Bible or a saint, paired with a serene nature photograph. The themes should be: Rest, Trust, Gratitude, Hope, Love. The copy should be universal and acceptable to non-believers."
+,47. Volunteer Training Course Development,"AI assists in designing the outline, materials, case studies, and assessment questionnaires for volunteer training courses.","Design an online training course outline for 'Telephone Care Volunteers.' The course needs to include four modules: 1. The Art of Listening; 2. How to Empathize and Respond; 3. Leading in Prayer; 4. Handling Emergencies and Referrals. Please provide learning objectives and key content points for each module."
+,48. Event Review Report Generation,"Based on the event plan, execution records, and feedback questionnaires, AI automatically generates a comprehensive event review report.","Based on this 'Youth Summer Camp' plan, financial expense sheet, and camper feedback questionnaire (data files), please generate a review report. The report needs to include: 1. Goal achievement status; 2. Budget execution analysis; 3. Highlights and shortcomings; 4. Suggestions for improvement for the next camp."
+,49. Speaker/Teacher Resource Library,"Organizes internal and external speakers' sermon/lecture videos or audios, and AI automatically generates transcripts, summaries, and topic tags for them.","Analyze the 3 lecture recordings of this guest speaker. Please generate a transcript for each lecture, a 500-word summary, and 5-8 topic tags (e.g., #FamilyRelations#, #EmotionManagement#, #OldTestamentWisdom#) for our internal speaker resource database."
+,50. Community Service Impact Assessment,"Synthesizes event data, media reports, and participant feedback to assess the impact of a community service event.","We held an ''Old Clothes, Warm Hearts'' clothing recycling environmental event last week. Please synthesize the following information: total weight of clothes collected (500 kg), number of participants (80), a link to a local community public account report, and feedback messages from residents, to write a 300-word impact summary."
+`;
+            const useCases = parseCSV(csvData);
+            const container = document.getElementById('use-cases-container');
+            
+            let lastCategory = '';
+            let categoryContainer;
+
+            useCases.forEach(useCase => {
+                if (useCase.category && useCase.category !== lastCategory) {
+                    lastCategory = useCase.category;
+                    categoryContainer = document.createElement('div');
+                    categoryContainer.className = 'category-section';
+                    
+                    const categoryTitle = document.createElement('h2');
+                    categoryTitle.textContent = lastCategory;
+                    categoryContainer.appendChild(categoryTitle);
+                    
+                    container.appendChild(categoryContainer);
+                }
+
+                if (categoryContainer) {
+                    const card = document.createElement('div');
+                    card.className = 'use-case-card';
+
+                    const title = document.createElement('h3');
+                    title.textContent = useCase.useCase;
+                    card.appendChild(title);
+
+                    const details = document.createElement('div');
+                    details.className = 'details';
+                    details.innerHTML = '<b>Detailed Description:</b> ' + useCase.description;
+                    card.appendChild(details);
+
+                    const prompt = document.createElement('div');
+                    prompt.className = 'prompt';
+                    prompt.innerHTML = '<b>Prompt Template:</b>';
+                    const pre = document.createElement('pre');
+                    pre.textContent = useCase.prompt;
+                    prompt.appendChild(pre);
+                    card.appendChild(prompt);
+
+                    categoryContainer.appendChild(card);
+                }
+            });
+        });
+
+        function parseCSV(text) {
+            const lines = text.split('\n').filter(line => line.trim() !== '');
+            const header = lines.shift().split(',');
+            const result = [];
+            let currentCategory = '';
+
+            lines.forEach(line => {
+                const parts = [];
+                let current = '';
+                let inQuotes = false;
+
+                // Simple CSV parser that handles quoted fields
+                // Not fully robust, but should work for this specific CSV structure.
+                let commaCount = 0;
+                let lastIndex = 0;
+                const columns = [];
+                
+                const splitPoints = [];
+                for(let i=0; i < line.length; i++){
+                    if(line[i] === ',') {
+                        splitPoints.push(i);
+                    }
+                }
+                
+                if (splitPoints.length >= 3) {
+                     columns.push(line.substring(0, splitPoints[0]));
+                     columns.push(line.substring(splitPoints[0] + 1, splitPoints[1]));
+                     columns.push(line.substring(splitPoints[1] + 1, splitPoints[2]));
+                     columns.push(line.substring(splitPoints[2] + 1));
+                } else {
+                    // Fallback for malformed lines, though should not happen with current data
+                    columns.push(...line.split(','));
+                }
+                
+                if (columns.length >= 4) {
+                    let category = columns[0].trim();
+                    if (category) {
+                        currentCategory = category;
+                    } else {
+                        category = currentCategory;
+                    }
+
+                    result.push({
+                        category: category,
+                        useCase: (columns[1] || '').trim(),
+                        description: (columns[2] || '').trim(),
+                        prompt: (columns[3] || '').trim()
+                    });
+                }
+            });
+
+            return result;
+        }
+    </script>
+
+    <a href="3.html" title="Back to Previous Page" style="position: fixed; bottom: 32px; right: 32px; background-color: #2c3e50; color: white; width: 56px; height: 56px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-decoration: none; transition: background-color 0.3s;">
+        <svg xmlns="http://www.w3.org/2000/svg" style="height: 24px; width: 24px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15l-3-3m0 0l3-3m-3 3h12a6 6 0 010 12h-3" />
+        </svg>
+    </a>
+
+</body>
+</html> 

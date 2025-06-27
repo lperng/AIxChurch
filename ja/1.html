@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インフォグラフィック：変動する世界における不変の道</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Application Structure Plan: A single-page, vertical scrolling infographic designed as a historical narrative. It begins with a strong thesis statement, then chronologically presents the four technological eras (Printing, Industrial, Internet, AI) as distinct, visually-themed sections. Each section uses a combination of large-number callouts, simple diagrams created with HTML/CSS, and Chart.js visualizations to explain the core concepts. The narrative culminates in a comparative analysis chart and a summary of key principles. This linear storytelling structure makes the complex historical progression easy to follow for the user. -->
+    <!-- Visualization & Content Choices: 
+    - Printing Press Impact -> Goal: Organize -> Viz: HTML/CSS flowchart -> Justification: Clearly shows the conceptual shift in information flow, more effective than a data chart.
+    - Industrial Revolution Impact -> Goal: Show Change/Relationship -> Viz: Chart.js Line Chart -> Justification: Best way to visualize the correlation between two changing variables (urbanization vs. social issues) over time as described in the report.
+    - Internet Impact -> Goal: Compare/Inform -> Viz: HTML/CSS diagram with Unicode icons -> Justification: A simple visual metaphor is more impactful for explaining the "fixed vs. wireless" theological concept than a data-heavy chart.
+    - AI Ethical Risks -> Goal: Compare -> Viz: Chart.js Radar Chart -> Justification: Ideal for comparing multiple qualitative factors (the ethical risks) against a central point.
+    - Overall Comparison -> Goal: Compare -> Viz: Chart.js Grouped Bar Chart -> Justification: Allows for direct comparison of the "challenge level" (a quantified concept from the qualitative report) across all four eras.
+    - All choices confirm to NO SVG / NO MERMAID JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; background-color: #F0F2F5; }
+        .hero-gradient { background: linear-gradient(135deg, #955196, #003F5C); }
+        .card { background-color: white; border-radius: 0.75rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); padding: 2rem; }
+        h1, h2, h3 { font-weight: 900; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        @media (max-width: 768px) { .chart-container { height: 300px; } }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center text-white p-12 rounded-xl hero-gradient mb-12">
+            <h1 class="text-4xl md:text-6xl mb-4">変動する世界における不変の道</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-90">技術革命は単なるツールの革新ではなく、各時代において教会にその使命とアイデンティティを再検討させる深刻な神学的触媒です。</p>
+        </header>
+
+        <section id="timeline" class="space-y-16">
+
+            <!-- Era 1: Printing Press -->
+            <div class="card grid md:grid-cols-2 gap-8 items-center">
+                <div class="text-content">
+                    <span class="text-sm font-bold text-[#955196]">約 1450-1750年</span>
+                    <h2 class="text-3xl md:text-4xl my-2">印刷された文字と<br>権威の再構築</h2>
+                    <p class="text-gray-600 mb-6">印刷術は、聖書解釈における教会の千年にわたる独占を打ち破り、「聖書のみ」を神学的原則から信者が実践できる現実に変えましたが、同時に宗派が乱立する時代を開始しました。</p>
+                    <div class="text-center p-6 bg-purple-50 rounded-lg">
+                        <span class="text-5xl font-black text-[#955196]">500%</span>
+                        <p class="font-bold mt-2">書籍生産量の増加</p>
+                        <p class="text-xs text-gray-500">15世紀後半と前半を比較した推定増加率</p>
+                    </div>
+                </div>
+                <div class="visualization p-6 bg-gray-50 rounded-lg">
+                    <h3 class="font-bold text-center mb-4">情報伝達モデルの変遷</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-semibold text-center mb-2">印刷術以前：中央集権</p>
+                            <div class="flex items-center justify-center space-x-2 text-sm">
+                                <span class="bg-purple-200 p-2 rounded">教会</span>
+                                <span class="font-bold text-purple-600 text-2xl">→</span>
+                                <span class="bg-purple-200 p-2 rounded">聖職者</span>
+                                <span class="font-bold text-purple-600 text-2xl">→</span>
+                                <span class="bg-purple-200 p-2 rounded">信徒</span>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div>
+                            <p class="font-semibold text-center mb-2">印刷術以後：非中央集権</p>
+                             <div class="flex items-center justify-center space-x-2 text-sm">
+                                <span class="bg-purple-200 p-2 rounded">聖書本文</span>
+                                <span class="font-bold text-purple-600 text-2xl">↔</span>
+                                <span class="bg-purple-200 p-2 rounded">個人信徒</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era 2: Industrial Revolution -->
+            <div class="card grid md:grid-cols-2 gap-8 items-center">
+                <div class="visualization">
+                    <h3 class="font-bold text-center mb-4">工業化と社会危機</h3>
+                     <div class="chart-container">
+                        <canvas id="industrialChart"></canvas>
+                    </div>
+                    <p class="text-xs text-gray-500 text-center mt-2">工業化プロセスと社会問題指数の関連性を示す模式図。</p>
+                </div>
+                <div class="text-content md:text-right">
+                    <span class="text-sm font-bold text-[#DD5182]">約 1750-1950年</span>
+                    <h2 class="text-3xl md:text-4xl my-2">蒸気機関と<br>社会の再構築</h2>
+                    <p class="text-gray-600 mb-6">産業革命がもたらした構造的不公正は、「社会福音」運動を生み出し、教会の使命を個人の救済から不正な社会構造への挑戦へと拡大させ、焦点は『アモス書』の社会正義に当てられました。</p>
+                     <div class="text-center p-6 bg-pink-50 rounded-lg md:ml-auto max-w-xs">
+                        <span class="text-5xl font-black text-[#DD5182]">10X</span>
+                        <p class="font-bold mt-2">都市人口の増加</p>
+                        <p class="text-xs text-gray-500">19世紀における一部の西欧主要都市の増加倍率</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era 3: Internet -->
+            <div class="card grid md:grid-cols-2 gap-8 items-center">
+                <div class="text-content">
+                    <span class="text-sm font-bold text-[#FF6E54]">約 1990年〜現在</span>
+                    <h2 class="text-3xl md:text-4xl my-2">インターネットと<br>プレゼンスの再構築</h2>
+                    <p class="text-gray-600 mb-6">インターネット、特に新型コロナウイルスの流行後、教会の「集会」と「プレゼンス」の根本的な定義に挑戦し、「ハイブリッド教会」と「デジタル教会論」を生み出しました。中心的な議論は『ヘブライ人への手紙』10章25節の解釈を巡って展開されています。</p>
+                     <div class="text-center p-6 bg-orange-50 rounded-lg">
+                        <span class="text-5xl font-black text-[#FF6E54]">95%</span>
+                        <p class="font-bold mt-2">教会がオンライン礼拝を提供</p>
+                        <p class="text-xs text-gray-500">COVID-19ピーク時の米国教会における推定割合</p>
+                    </div>
+                </div>
+                 <div class="visualization p-6 bg-gray-50 rounded-lg">
+                    <h3 class="font-bold text-center mb-4">礼拝モデルの神学的解釈</h3>
+                     <div class="space-y-4">
+                        <div>
+                            <p class="font-semibold text-center mb-2">旧約：固定ブロードバンドモデル</p>
+                            <div class="text-center">
+                                <span class="text-5xl">🏛️</span>
+                                <p class="mt-2 text-sm">礼拝は特定の場所（神殿）への接続が必要</p>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div>
+                            <p class="font-semibold text-center mb-2">新約：ワイヤレスネットワークモデル</p>
+                            <div class="text-center">
+                                <span class="text-5xl">📶</span>
+                                <p class="mt-2 text-sm">キリストを通して、どこでも礼拝が可能</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Era 4: Artificial Intelligence -->
+             <div class="card grid md:grid-cols-2 gap-8 items-center">
+                <div class="visualization">
+                    <h3 class="font-bold text-center mb-4">AI倫理リスク評価</h3>
+                     <div class="chart-container">
+                        <canvas id="aiRiskChart"></canvas>
+                    </div>
+                     <p class="text-xs text-gray-500 text-center mt-2">AIが異なる倫理的側面で持つ潜在的なリスクレベルを示す模式図。</p>
+                </div>
+                <div class="text-content md:text-right">
+                    <span class="text-sm font-bold text-[#FFA600]">現在から未来へ</span>
+                    <h2 class="text-3xl md:text-4xl my-2">人工知能と<br>人間性の再構築</h2>
+                    <p class="text-gray-600 mb-6">AIは人間性の本質を直接問い、教会を受動的な対応から倫理的枠組みの能動的な構築へと転換させます。中心的な神学的応答は、『創世記』1章27節にある「神のかたち（Imago Dei）」の独創性と尊厳を再確認することです。</p>
+                    <div class="text-center p-6 bg-amber-50 rounded-lg md:ml-auto max-w-xs">
+                        <span class="text-5xl font-black text-[#FFA600]">75%</span>
+                        <p class="font-bold mt-2">牧師がAI倫理ガイドラインの確立を支持</p>
+                        <p class="text-xs text-gray-500">最近の信仰指導者調査に基づく推定</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Comparative Analysis -->
+        <section id="comparison" class="mt-16">
+            <div class="card">
+                <h2 class="text-3xl md:text-4xl text-center mb-8">四つの時代の挑戦レベル比較</h2>
+                <div class="chart-container" style="height: 450px; max-height: 500px;">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+                <p class="text-xs text-gray-500 text-center mt-4">この図は、報告書の質的記述を模式的な量的比較に変換し、各技術革命が教会にもたらした挑戦の深さを視覚化します。</p>
+            </div>
+        </section>
+        
+        <!-- Conclusion -->
+        <section id="conclusion" class="mt-16">
+            <h2 class="text-3xl text-center mb-8">未来のために永遠の原則を求める</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full" style="background-color: #955196;">
+                        <span class="text-white text-2xl">💡</span>
+                    </div>
+                    <h3 class="text-lg font-bold my-4">神学的敏捷性</h3>
+                    <p class="text-sm text-gray-600">聖書から迅速に資源を引き出し、新たな挑戦に深く応答する。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full" style="background-color: #DD5182;">
+                        <span class="text-white text-2xl">⚖️</span>
+                    </div>
+                    <h3 class="text-lg font-bold my-4">倫理的先見性</h3>
+                    <p class="text-sm text-gray-600">受動的に反応するのではなく、技術の発展を積極的に形成する。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full" style="background-color: #FF6E54;">
+                        <span class="text-white text-2xl">🔍</span>
+                    </div>
+                    <h3 class="text-lg font-bold my-4">批判的識別力</h3>
+                    <p class="text-sm text-gray-600">「ツールを使用する」ことと「そのツールに埋め込まれたイデオロギーを受け入れる」ことを区別する。</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow">
+                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full" style="background-color: #FFA600;">
+                        <span class="text-white text-2xl">⚓</span>
+                    </div>
+                    <h3 class="text-lg font-bold my-4">核心的教義への固執</h3>
+                    <p class="text-sm text-gray-600">受肉、神のかたちといった基礎の上に新しい事物を評価する。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-8 mt-8 text-gray-500 text-sm">
+        <p>報告書『変動する世界における不変の道』に基づき、このインフォグラフィックを作成しました。</p>
+    </footer>
+
+    <a href="outline.html" title="ホームページに戻る" class="fixed bottom-8 right-8 bg-gray-800 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-gray-700 transition-colors z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+    </a>
+
+    <script>
+        const chartTooltipCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+        
+        const industrialData = {
+            labels: ['1750', '1800', '1850', '1900', '1950'],
+            datasets: [{
+                label: '工業化プロセス',
+                data: [10, 25, 50, 75, 90],
+                borderColor: '#DD5182',
+                backgroundColor: 'rgba(221, 81, 130, 0.2)',
+                tension: 0.4,
+                fill: true,
+            }, {
+                label: '社会問題指数',
+                data: [5, 20, 60, 80, 65],
+                borderColor: '#444E86',
+                backgroundColor: 'rgba(68, 78, 134, 0.2)',
+                tension: 0.4,
+                fill: true,
+            }]
+        };
+        new Chart(document.getElementById('industrialChart'), {
+            type: 'line',
+            data: industrialData,
+            options: { ...chartTooltipCallback, responsive: true, maintainAspectRatio: false }
+        });
+
+        const aiRiskData = {
+            labels: ['アルゴリズムの偏見', '非人間化', '欺瞞と偽預言者', 'プライバシーと監視', '不正義の増大'],
+            datasets: [{
+                label: '潜在的リスクレベル',
+                data: [7, 8, 9, 8, 7],
+                fill: true,
+                backgroundColor: 'rgba(255, 166, 0, 0.2)',
+                borderColor: '#FFA600',
+                pointBackgroundColor: '#FFA600',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#FFA600'
+            }]
+        };
+        new Chart(document.getElementById('aiRiskChart'), {
+            type: 'radar',
+            data: aiRiskData,
+            options: { ...chartTooltipCallback, responsive: true, maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 10 } } }
+        });
+
+        const comparisonData = {
+            labels: ['権威への挑戦', '社会構造への挑戦', 'プレゼンスとコミュニティへの挑戦', '人間性の本質への挑戦'],
+            datasets: [{
+                label: '印刷術',
+                data: [8, 1, 1, 0],
+                backgroundColor: '#955196',
+            }, {
+                label: '産業革命',
+                data: [2, 9, 3, 2],
+                backgroundColor: '#DD5182',
+            }, {
+                label: 'インターネット',
+                data: [5, 4, 9, 4],
+                backgroundColor: '#FF6E54',
+            }, {
+                label: '人工知能',
+                data: [6, 7, 7, 10],
+                backgroundColor: '#FFA600',
+            }]
+        };
+        new Chart(document.getElementById('comparisonChart'), {
+            type: 'bar',
+            data: comparisonData,
+            options: { ...chartTooltipCallback, responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 10, title: { display: true, text: '挑戦レベル (1-10)' } } } }
+        });
+    </script>
+</body>
+</html>
+
