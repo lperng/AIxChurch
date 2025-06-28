@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI赋能牧养与社区服务之百大案例</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+        }
+        .prompt-code {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        /* Simple transition for card filtering */
+        .use-case-card {
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+        .hidden-card {
+            opacity: 0;
+            transform: scale(0.95);
+            height: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+        .markdown-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;}
+        .markdown-content p { margin-bottom: 1rem; line-height: 1.75; }
+        .markdown-content ul { list-style-type: disc; padding-left: 2rem; margin-bottom: 1rem; }
+        .markdown-content ol { list-style-type: decimal; padding-left: 2rem; margin-bottom: 1rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
+        .markdown-content pre { background-color: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1rem; white-space: pre-wrap; word-wrap: break-word; }
+        .markdown-content code { background-color: #e5e7eb; padding: 0.2em 0.4em; border-radius: 0.3em; font-family: monospace; }
+        .markdown-content pre > code { background-color: transparent; padding: 0; }
+        .markdown-content blockquote { border-left: 4px solid #d1d5db; padding-left: 1rem; margin-left: 0; font-style: italic; color: #4b5563; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header Section -->
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">AI赋能牧养与社区服务</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-sky-600">百大应用案例</h2>
+            <p class="mt-4 text-gray-600 max-w-3xl mx-auto">
+                一个为中国大陆地区牧者与同工设计的互动资源库。您可以通过分类筛选或关键词搜索，快速找到相关AI应用场景，并点击卡片获取具体的"提示词范本"。
+            </p>
+        </header>
+
+        <!-- Controls: Search and Filter -->
+        <div class="sticky top-0 bg-gray-50/80 backdrop-blur-lg z-10 py-4 mb-8">
+            <div class="max-w-4xl mx-auto">
+                <!-- Search Input -->
+                <div class="mb-4 relative">
+                    <input type="text" id="searchInput" placeholder="搜索案例、类别或提示词中的关键词..." class="w-full px-4 py-3 border border-gray-300 rounded-full shadow-sm focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-shadow">
+                    <svg class="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <!-- Filter Buttons -->
+                <div id="filterContainer" class="flex flex-wrap justify-center gap-2">
+                    <!-- Filter buttons will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Use Case Cards Grid -->
+        <main id="useCasesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Use case cards will be dynamically inserted here -->
+        </main>
+        
+        <!-- No Results Message -->
+        <div id="noResultsMessage" class="hidden text-center py-16">
+            <h3 class="text-2xl font-semibold text-gray-700">未找到匹配的案例</h3>
+            <p class="text-gray-500 mt-2">请尝试调整您的筛选条件或搜索关键词。</p>
+        </div>
+    </div>
+    
+    <!-- Modal for AI Output -->
+    <div id="aiOutputModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300 ease-in-out">
+        <div id="modalContent" class="bg-white rounded-xl shadow-2xl p-6 md:p-8 max-w-2xl w-full mx-4 transform transition-transform duration-300 ease-in-out scale-95">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">AI 输出范例</h3>
+                    <p id="modalUseCase" class="text-sm text-gray-500 mt-1"></p>
+                </div>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600 text-4xl font-light leading-none -mt-2 -mr-2">&times;</button>
+            </div>
+            <div id="modalBody" class="markdown-content text-base text-gray-700 leading-relaxed max-h-[60vh] overflow-y-auto pr-4">
+                <!-- AI output content will go here -->
+            </div>
+            <div class="mt-6 text-right">
+                <button id="closeModalBtnFooter" class="px-5 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-6 mt-8 bg-gray-100">
+        <p class="text-gray-500 text-sm">&copy; 2025 AI赋能资源库. 专为牧者与同工设计.</p>
+    </footer>
+
+<script>
+const useCases = [
+    // 1-20 内容创作与媒体
+    {"category":"内容创作与媒体","use_case":"讲章主题与大纲生成","description":"根据经文、节期或社会热点，AI自动生成多元的讲章主题与大纲建议。","prompt":"你是一位资深的神学研究助理。请根据经文「罗马书 12:1-2」和社会热点「年轻人职业倦怠现象」，为本主日的证道信息提供3个不同的讲题与三点式大纲，风格需兼具真理深度与现实关怀。"},
+    {"category":"内容创作与媒体","use_case":"每周金句图卡设计","description":"自动将每周金句设计成适合微信朋友圈、小红书或教会群组发布的精美图卡。","prompt":"(对图像生成AI) 生成一张适合微信朋友圈分享的图卡(9:16竖版)，背景是温暖的麦田，风格写实且明亮。图片中央用优雅的简体中文宋体写上金句：「你们的光也当这样照在人前」，并在右下角用小字标示出处「马太福音 5:16」。"},
+    {"category":"内容创作与媒体","use_case":"诗歌创作灵感激发","description":"AI协助生成和弦进行、旋律动机或符合特定主题的歌词，供敬拜团队参考。","prompt":"我正在为教会的青年团契创作一首关于「使命」的诗歌，风格类似「赞美之泉」或「小羊诗歌」。请提供三组不同的和弦进行，并围绕「走出去，成为光」的核心意象，写出两段主歌和一段副歌的歌词草稿。"},
+    {"category":"内容创作与媒体","use_case":"个人见证故事文稿化","description":"将会友的口述见证录音或零散文字，由AI整理并改写成适合在聚会中分享的通顺文稿。","prompt":"请将这段10分钟的口述见证录音转为文字，并将其改写成一篇800字左右的书面稿。请保留核心的感人细节，理顺叙事逻辑，使其更具感染力，适合在主日崇拜中诵读。"},
+    {"category":"内容创作与媒体","use_case":"节期活动策划方案","description":"针对圣诞节、复活节等重要节期，AI提供创意活动方案、流程设计与宣传文案。","prompt":"为我们在上海静安区的教会，策划一个圣诞节的「社区开放日」活动。请提供三个创意主题，并选择其中一个，设计包含时间、流程、物料准备清单与微信公众号推文的详细策划案。"},
+    {"category":"内容创作与媒体","use_case":"圣经故事短视频脚本","description":"为儿童主日学生成圣经故事的短视频脚本，适合在抖音或微信视频号上发布。","prompt":"为5-8岁的儿童，撰写一个关于「好撒玛利亚人」的60秒短视频脚本。请用简单、押韵的对白，并描述出5个关键的镜头画面，配上背景音乐和音效建议，使其生动有趣。"},
+    {"category":"内容创作与媒体","use_case":"播客/音频节目策划","description":"协助策划音频节目的每期主题、访谈问题、内容流程，并自动生成摘要与文字稿。","prompt":"策划一个名为「行在路上」的基督徒生活播客。第一期主题是「如何处理家庭中的信仰差异」。请列出5个给嘉宾的深度访谈问题、节目开场与结尾口播稿，并为这期内容写一篇300字的微信推文。"},
+    {"category":"内容创作与媒体","use_case":"公祷文与祝福语撰写","description":"根据不同场合（如追思、差遣、为城市祷告），草拟适切的公祷文或祝福语。","prompt":"请为即将奔赴外地求学的几位年轻弟兄姊妹撰写一篇差遣祝福祷文。祷文中需包含对他们学业、新生活适应及灵命成长的祝福，并引用「耶和华必在你前面行」的经文。"},
+    {"category":"内容创作与媒体","use_case":"微信公众号文章排版美化","description":"AI根据文章内容，自动推荐排版样式、配图和标题，提升文章阅读体验。","prompt":"我写了一篇关于「如何读经」的文章。请你扮演一位资深微信编辑，为这篇文章提供三个吸引人的标题，并在文章中建议5个插入图片的位置和图片内容描述，同时优化段落间距和重点文字的样式。"},
+    {"category":"内容创作与媒体","use_case":"历史资料数字化与索引","description":"将教会的历史资料、老照片、会议记录数字化，并利用AI生成摘要与关键词索引。","prompt":"分析这份上传的教会30年发展史PDF文档，为其生成一份800字的内容摘要，并列出15个最重要的关键词（包含人名、重要事件、发展阶段），以便日后检索。"},
+    {"category":"内容创作与媒体","use_case":"内部奉献报告设计","description":"设计用于内部沟通的奉献报告模板，使其清晰、透明且充满感恩。","prompt":"设计一个教会月度奉献报告的PPT模板（16:9）。风格需庄重、感恩。页面需包含：总览页（含图表）、各事工支出分析页、特别奉献项目进展页和感恩分享页。请给出设计建议。"},
+    {"category":"内容创作与媒体","use_case":"福音微电影剧本创作","description":"创作适合在Bilibili（B站）或福音营播放的微电影剧本。","prompt":"创作一个10分钟的微电影剧本。故事背景设定在深圳，主角是一位面临「35岁危机」的程序员。剧情要反映当代职场人的焦虑与挣扎，并通过一个契机让他开始思考生命的终极意义。请提供人物小传、故事大纲和开篇三分钟的剧本。"},
+    {"category":"内容创作与媒体","use_case":"信息图（Infographic）内容生成","description":"将复杂的教义或讲道系列内容，转化为易于理解和分享的信息图文案。","prompt":"将「因信称义」这个神学概念，设计成一张信息图的文案。请用5个要点，配上通俗的比喻和简洁的文字，解释其含义、圣经依据和对生活的影响。"},
+    {"category":"内容创作与媒体","use_case":"微信表情包创作构思","description":"构思一系列符合教会文化、可爱有趣的微信表情包（GIF动图）概念。","prompt":"构思一套12个的「小小门徒」系列微信表情包。角色是一个可爱的Q版小基督徒。请为每个表情包设计一个动作和对应的文字，例如：一个鞠躬的动作配「阿们」，一个双手合十的动作配「为你祷告」。"},
+    {"category":"内容创作与媒体","use_case":"讲道内容二次创作","description":"将一篇讲道文稿，改编成适合不同平台发布的多种形式内容。","prompt":"请将这篇3000字的讲道稿《信心的跳跃》，改编成：1. 一篇800字的微信公众号精读版；2. 五条适合发在朋友圈的金句摘要；3. 一个3分钟的播客口播稿。"},
+    {"category":"内容创作与媒体","use_case":"系列主题内容规划","description":"为公众号或小组学习，规划一个持续数周或数月的系列主题内容。","prompt":"为我们的微信公众号规划一个为期四个月的「诗篇中的生命情感」系列。请列出每个月的主题（如：赞美、哀歌、智慧、君王），并为第一个月「赞美」主题下的四周，提供每周的文章切入点和选读诗篇。"},
+    {"category":"内容创作与媒体","use_case":"读书/观影会讨论题设计","description":"为指定的书籍或电影，设计有深度、能引导信仰反思的讨论题。","prompt":"我们小组计划一起看电影《心灵奇旅》(Soul)。请设计8个讨论题，将电影情节与信仰中关于「呼召、生命意义、恩赐」等主题联系起来。"},
+    {"category":"内容创作与媒体","use_case":"敬拜赞美流程（Setlist）设计","description":"根据讲道主题和信息，智能推荐和组织一场敬拜赞美的诗歌流程。","prompt":"本周日证道主题是「在基督里的安息」，信息经文是马太福音11:28-30。请设计一个4首歌的敬拜流程，包含开场、回应和结束诗歌，并说明每首歌与主题的关联。诗歌库请从「小羊诗歌」、「赞美之泉」、「迦南诗选」中选择。"},
+    {"category":"内容创作与媒体","use_case":"寓言故事或比喻创作","description":"为讲道或主日学，创作原创的、贴近当代生活的寓言故事或比喻。","prompt":"请创作一个关于「网络信息茧房」的现代寓言故事，用以说明「只听自己想听的」这种属灵上的危险。故事主角可以是一个只关注自己喜欢博主的年轻人。"},
+    {"category":"内容创作与媒体","use_case":"微信视频号内容分析","description":"分析教会视频号的数据，找出观众偏好，优化未来视频内容。","prompt":"分析我们教会视频号过去20条视频的数据（播放量、点赞、转发、完播率）。请总结出最受用户欢迎的视频类型（如：诗歌MV、牧者分享、见证故事），并为我们下一步的内容创作方向提出三点建议。"},
+    // 21-40 教育与培训
+    {"category":"教育与培训","use_case":"个人化灵修材料推送","description":"根据信徒的灵命阶段与近期困扰，AI每日通过微信推送个人化的经文、默想和祷告指引。","prompt":"为一位初信一年的职场新人设计一个为期七天的灵修计划。他的困扰是人际关系处理。请每天提供一段相关经文、一段默想引导(约200字)、2个反思问题，和一句简短的祷告词，以便通过微信每日推送。"},
+    {"category":"教育与培训","use_case":"信仰问题智能问答库","description":"建立一个AI知识库，能即时回答关于圣经、神学、护教等常见问题。","prompt":"从历史、神学和解经学角度，综合分析并回答「预定论与自由意志是否矛盾？」这个问题。请列出奥古斯丁、加尔文和亚米念的主要观点，并提供一段给普通信徒的平衡性应用建议。"},
+    {"category":"教育与培训","use_case":"主日学/小组查经备课","description":"自动生成包含背景介绍、经文分析、讨论问题和应用的完整备课材料。","prompt":"为成人主日学设计一堂60分钟的课程，查考「以弗所书第4章1-16节」。备课材料需包含：1. 经文背景介绍；2. 逐节要点解析；3. 5个深度的小组讨论题；4. 2个个人生活应用挑战。"},
+    {"category":"教育与培训","use_case":"神学书籍与讲座摘要","description":"将冗长的神学书籍或海外讲座视频（带字幕），由AI快速生成核心论点摘要。","prompt":"请将提摩太·凯勒（Timothy Keller）所著的《工作的意义》(Every Good Endeavor)一书的第一部分，整理成1000字的摘要，并分析其提出的关于工作的「创造、堕落、救赎」框架。"},
+    {"category":"教育与培训","use_case":"义工/同工岗前培训","description":"创建模拟情境，让新义工通过与AI角色扮演，学习如何接待新人、进行电话关怀等。","prompt":"你现在扮演一位对教会有误解、态度有些抵触的社区居民。我将扮演教会义工，练习如何友善、智慧地与你沟通。请在我与你互动后，给我具体的反馈和改进建议。"},
+    {"category":"教育与培训","use_case":"圣经原文学习辅助","description":"提供经文的希伯来文/希腊文原文、罗马字拼音、词义分析（parsing）和串珠功能。","prompt":"请对「创世记 1:1」的希伯来文原文进行分析。列出每个单词的原文、音译和中文直译，并对「בָּרָא」(bara) 这个动词的词性和在旧约中的用法进行详细解释。"},
+    {"category":"教育与培训","use_case":"门徒训练体系化管理","description":"为门训课程建立学习路径，AI根据学员提交的作业和感悟，提供个人化的反馈和补充材料。","prompt":"学员B在「饶恕」这个功课的分享中提到，他知道应该饶恕，但心里就是做不到。请根据这个反馈，为他提供三项具体的操练建议，并推荐一篇关于「饶恕的深层医治」的文章。"},
+    {"category":"教育与培训","use_case":"互动式信仰初探课程","description":"为慕道友设计H5或微信小程序，通过互动问答与情境选择，探索信仰核心。","prompt":"设计一个H5互动页面：开头是一个问题「如果生命是一场旅行，你最看重的是什么？」 ，提供三个选项「沿途的风景」、「同行的人」和「最终的目的地」。根据用户的不同选择，引向不同的信仰思考路径和经文。"},
+    {"category":"教育与培训","use_case":"圣经历史时间轴生成","description":"根据圣经事件或人物，自动生成可视化的历史时间轴。","prompt":"请生成一份关于「以色列王国分裂时期」的详细历史时间轴，从所罗门王去世开始，到北国以色列被亚述所灭结束。时间轴需包含南北国各位君王、重要的先知活动和关键历史事件。"},
+    {"category":"教育与培训","use_case":"经典属灵著作导读","description":"将经典属灵著作（如《天路历程》、《效法基督》）的核心思想，转化为易于理解的导读材料。","prompt":"为《天路历程》第一部分撰写一份小组学习导读。请将其分为4个学习单元，为每个单元提供内容摘要、关键寓意解读和3-4个联系个人生命历程的讨论题。"},
+    {"category":"教育与培训","use_case":"培训课程效果评估问卷设计","description":"为培训课程或营会，设计科学、有效的匿名反馈问卷。","prompt":"为期三天的「夫妻关系成长营」即将结束。请设计一份匿名在线问卷，用以评估营会的整体效果。问卷需包含关于讲员、内容、后勤和个人收获的选择题和开放式问题。"},
+    {"category":"教育与培训","use_case":"跨文化宣教培训案例","description":"生成用于跨文化宣教培训的模拟案例，帮助学员思考和应对文化冲突。","prompt":"创建一个用于宣教培训的案例：一位中国同工到东南亚某国服事，他发现当地人对时间的观念非常模糊，常常迟到，导致事工计划被打乱。请设计3个问题，引导学员讨论如何在该情境下，以恩典和智慧来应对。"},
+    {"category":"教育与培训","use_case":"神学词汇通俗化解释","description":"将专业的神学词汇（如：三位一体、道成肉身、因信称义）用生活化的语言和比喻解释清楚。","prompt":"请用一个生动的比喻，向一个12岁的孩子解释「三位一体」的基本概念。比喻需要强调「独一」和「三个位格」的特点，同时要提醒他这只是一个不完美的比喻。"},
+    {"category":"教育与培训","use_case":"圣经地理背景可视化","description":"利用地图工具，将圣经事件发生的地理位置、人物的行走路线进行可视化呈现。","prompt":"请使用百度地图API或类似工具的描述，勾画出使徒保罗第一次宣教旅程的路线图。在地图上标注出他出发、途经和返回的关键城市，并附上每个城市发生的主要事件简介。"},
+    {"category":"教育与培训","use_case":"义工技能提升计划","description":"根据义工的服事岗位和反馈，为他们推荐线上学习资源，制定个人成长计划。","prompt":"一位负责青少年事工的义工表示，感觉自己「跟不上00后的想法」。请为他推荐3个Bilibili上关于青年文化分析的优质Up主，2本关于青少年心理学的书籍，并制定一个为期3个月的学习计划。"},
+    {"category":"教育与培训","use_case":"互动式圣经知识竞答","description":"设计可以在小组或团契中使用的圣经知识问答游戏题目和规则。","prompt":"设计一套20题的「新约人物」知识问答，题目分为「简单」、「中等」、「困难」三个等级。题目形式可以是选择题或填空题，并附上正确答案和经文出处。"},
+    {"category":"教育与培训","use_case":"海外优质神学资源翻译","description":"辅助翻译优秀的英文神学文章、讲座或书籍摘要，供内部学习使用。","prompt":"请将这段英文的神学文章（关于「上帝的全知与祷告的意义」）翻译成流畅、准确的简体中文，并保持原作的学术严谨性。原文：[粘贴英文段落]"},
+    {"category":"教育与培训","use_case":"领导力培训案例库","description":"创建一个包含多种领导力挑战情境的案例库，用于同工或小组长的培训。","prompt":"创建一个领导力培训案例：「你的小组中有两位成员因观点不同产生激烈冲突，并开始在群里互相攻击。作为小组长，你该如何处理？」请提供三个不同的处理方案，并分析其优缺点。"},
+    {"category":"教育与培训","use_case":"个性化阅读书单推荐","description":"根据信徒提出的问题或兴趣点，AI推荐一个包含3-5本书的个性化阅读书单。","prompt":"一位弟兄对「科学与信仰的关系」很感兴趣，但有一些困惑。请为他推荐一个包含3本书的阅读书单，需包含护教类、科学家见证类和神学思考类书籍，并简要说明每本书的特点。"},
+    {"category":"教育与培训","use_case":"慕道班课程体系评估与优化","description":"分析现有慕道班课程大纲和学员反馈，提出优化建议。","prompt":"分析这份「慕道班课程大纲」和「学员结业反馈表」。请根据反馈中「内容太理论化」的意见，提出三项具体的改进建议，例如增加更多互动环节、个人见证分享或生活应用讨论。"},
+    // 41-60 沟通与关怀
+    {"category":"沟通与关怀","use_case":"智能关怀与代祷机器人","description":"在微信群或小程序中，机器人能24小时收集代祷事项、提供初步安慰，并在必要时提醒同工介入。","prompt":"(后台设定) 你是教会的代祷小助手「以诺」。当群成员发送「请为我妈妈的健康祷告」时，你自动回复：「已收到您的代祷事项，我们将同心为您和妈妈祷告。愿主赐下平安与医治。『耶和华是我的牧者，我必不至缺乏。』」"},
+    {"category":"沟通与关怀","use_case":"新朋友关怀自动化流程","description":"新朋友留下联系方式后，AI通过企业微信自动触发一系列欢迎信息、教会介绍与活动邀请。","prompt":"为教会的新朋友设计一个为期三周的企业微信欢迎流程。第一封信息在新朋友登记后一天发送，主题是「欢迎回家！」，附上牧者的欢迎视频。第二封在一周后发送，介绍小组生活。第三封邀请他们参加线上新朋友见面会。请撰写这三封信息的文案。"},
+    {"category":"沟通与关怀","use_case":"会友灵命状态感知","description":"通过分析（匿名的）代祷事项、群聊内容，了解会友近期的共同挣扎与属灵需求。","prompt":"分析这份匿名的教会代祷墙文字记录，将其内容分类为：健康、工作、家庭、学业、灵命等。请统计各类别占比，并总结出近期最突出的三个共同属灵需求，以便牧者在讲道和关怀中回应。"},
+    {"category":"沟通与关怀","use_case":"个人化关怀信息草拟","description":"关怀同工输入探访对象的状况，AI协助生成一封充满真理与温暖的微信慰问信息。","prompt":"请为一位最近失业的弟兄（李洋）写一段500字左右的微信关怀信息。请在信息中引用「马太福音 6:26」关于飞鸟的经文，鼓励他信靠天父的供应，并表达教会愿意随时为他提供实际帮助。"},
+    {"category":"沟通与关怀","use_case":"「潜水」会友关怀提醒","description":"AI根据会友在微信群的活跃度、聚会签到情况，自动提示可能需要跟进关怀的「潜水」或疏远成员。","prompt":"(对内部数据分析) 请从过去两个月的微信群发言记录和线上聚会签到表中，筛选出「过去活跃，但最近一个月无任何发言或签到记录」的会友名单，并按所属小组分类，以便跟进。"},
+    {"category":"沟通与关怀","use_case":"微信群信息自动摘要","description":"AI每日定时将微信群中重要的通知、代祷事项和精彩分享，自动整理成一条精华摘要。","prompt":"请自动抓取「同工交流群」昨天下午2点至今的所有聊天记录，提取出其中关于「周六社区服务活动」的所有通知和安排，并整理成一条清晰的摘要，在今早9点发送到群里。"},
+    {"category":"沟通与关怀","use_case":"危机事件沟通模板","description":"当发生紧急公共事件或内部危机时，AI能快速提供对内、对外的声明或通知模板。","prompt":"因应政府发布的恶劣天气（如暴雨）预警，本周的线下实体聚会可能需要取消。请草拟一份对内的通知（发在微信群），和一份对外较为正式的公告（用于公众号），说明潜在的变更方案。"},
+    {"category":"沟通与关怀","use_case":"探访反馈智能整理","description":"将同工的探访录音或手写笔记，快速整理成结构化的探访报告，便于存档和跟进。","prompt":"请将这段关于探访张奶奶的5分钟语音笔记，整理成一份探访报告。报告需包含：1. 探访日期；2. 探访对象身心状况；3. 主要代祷需求；4. 下次跟进建议。"},
+    {"category":"沟通与关怀","use_case":"小组破冰问题生成器","description":"为不同类型的小组（如学生、职场、家庭）生成有趣且有深度的破冰问题。","prompt":"为北京一个由互联网从业者组成的青年职场小组，生成5个破冰问题。问题需要轻松有趣，能引发共鸣，同时避免过于隐私。例如：「如果你的信仰有一个产品Slogan，会是什么？」"},
+    {"category":"沟通与关怀","use_case":"关怀资源库构建","description":"针对常见的人生难题（如：失恋、丧亲、育儿焦虑），整理和创建一个包含文章、书籍、视频和支持机构联系方式的资源包。","prompt":"创建一个「走出哀伤」的关怀资源包。内容需包括：1. 三篇关于处理悲伤的心理学和神学文章摘要；2. 推荐2本相关书籍；3. 3个讲述走出哀伤经历的见证视频链接；4. 一个简短的、充满安慰的祷告文。"},
+    {"category":"沟通与关怀","use_case":"生日/纪念日祝福语个性化","description":"根据会友的年龄、身份和性格，生成个性化的生日或信仰纪念日祝福语。","prompt":"请为教会里一位热心服事、性格开朗的姐妹（王阿姨，60岁）写一段生日祝福语，准备发在教会群里。祝福语需要肯定她在教会的付出，并引用诗篇90:12来祝福她。"},
+    {"category":"沟通与关怀","use_case":"微信群健康度分析","description":"分析微信群的聊天记录（匿名化处理），评估群的健康状况。","prompt":"分析「青年团契」微信群过去一个月的聊天数据。请评估其健康度，指标包括：1. 成员参与度（发言人数比例）；2. 互动性（回复和@的频率）；3. 内容导向（闲聊、通知、灵性分享的比例）。"},
+    {"category":"沟通与关怀","use_case":"关怀探访路线规划","description":"为需要一天内探访多个家庭的同工，规划出最省时省力的探访路线。","prompt":"我今天需要从教会出发，探访在广州市海珠区、荔湾区和越秀区的三个家庭。请使用高德地图或百度地图的路线规划功能，为我设计一条最优的驾车路线，并预估总时长。"},
+    {"category":"沟通与关怀","use_case":"冲突调解对话框架","description":"为处理人际冲突的同工，提供一个符合圣经原则的对话框架和步骤建议。","prompt":"为调解两位因事工意见不合而产生矛盾的同工，提供一个对话框架。框架需包含：1. 祷告预备；2. 分别倾听双方（非论断原则）；3. 引导双方表达感受而非指责；4. 寻找共同目标；5. 达成和解与饶恕。"},
+    {"category":"沟通与关怀","use_case":"关怀性提问技巧训练","description":"AI扮演需要被关怀的对象，让同工练习如何提出有深度、有同理心的开放式问题。","prompt":"你扮演一位因孩子教育问题而感到非常焦虑的母亲。我来练习关怀你。请在我提问后，评价我的问题是「封闭式」还是「开放式」，是否能引导你深入思考和表达。"},
+    {"category":"沟通与关怀","use_case":"祷告会主题与经文链设计","description":"为每周的祷告会，根据特定主题设计一个包含多段经文的「经文祷告链」。","prompt":"为本周以「为城市求平安」为主题的祷告会，设计一个经文祷告链。请从耶利米书、诗篇和提摩太前书中，找出4-5段相关经文，并将其串联成一个完整的祷告流程。"},
+    {"category":"沟通与关怀","use_case":"敏感话题沟通指南","description":"针对一些敏感的社会或伦理话题，为牧者提供一个平衡、有智慧的内部沟通指南。","prompt":"针对「人工智能对未来社会的影响」这一话题，为牧者提供一份内部教导和沟通指南。指南需包含：1. 从创造、堕落、救赎角度的神学反思；2. 对信徒在职场和生活中可能面对的挑战的提醒；3. 鼓励以积极和智慧的态度面对技术变革。"},
+    {"category":"沟通与关怀","use_case":"义工关怀与激励","description":"定期为义工团队撰写充满感谢和鼓励的内部信件或微信消息。","prompt":"请为过去一个月辛勤付出的主日学老师团队，写一封感谢信。信中需要具体提到他们的劳苦（如备课、爱孩子），用经文肯定他们服事的价值，并为他们献上祝福祷告。"},
+    {"category":"沟通与关怀","use_case":"关怀电话/微信效果评估","description":"设计简单的评估方法，帮助关怀团队评估其沟通的有效性（非量化）。","prompt":"设计一个简单的内部评估表，供关怀同工在每次电话或微信关怀后自我评估。表格可包含：「我是否做到了有效倾听？」、「对方是否感受到了被理解？」、「我是否传递了从神而来的盼望？」等反思性问题。"},
+    {"category":"沟通与关怀","use_case":"新媒体平台用户画像分析","description":"分析教会抖音或B站粉丝的画像，以便更好地进行沟通和内容创作。","prompt":"分析我们Bilibili频道粉丝的后台数据。请总结出粉丝的年龄分布、性别比例、地域分布和兴趣标签，为我们创作更贴近他们需求的内容提供依据。"},
+    // 61-80 行政与管理
+    {"category":"行政与管理","use_case":"奉献数据分析与报告","description":"分析历史奉献数据，生成内部财务报告，帮助同工了解财务健康状况和奉献趋势。","prompt":"分析这份匿名的奉献数据Excel表。请生成一份报告，包含：1. 过去一年的月度总奉献趋势图。2. 各项事工（如慈惠、宣教）奉献的占比图。3. 识别并说明奉献金额有显著增长或下降的月份可能的原因。"},
+    {"category":"行政与管理","use_case":"场地与资源智能调度","description":"根据活动申请，AI自动安排场地、设备使用，预测冲突并提出最佳化方案。","prompt":"我有三个活动申请：A活动(周五晚, 50人, 需投影)、B活动(周六早, 20人, 需白板)、C活动(周六晚, 100人, 需音响)。请根据我们的场地清单(主堂、副堂、小会议室)，提供一个无冲突的最佳排程方案。"},
+    {"category":"行政与管理","use_case":"义工恩赐与岗位匹配","description":"根据义工的恩赐自评、兴趣与时间，AI推荐最适合他们的服事岗位。","prompt":"根据这份「义工恩赐与技能调查表」，请为「儿童主日学老师」和「敬拜PPT播放」这两个岗位，分别推荐三位最匹配的义工，并简述推荐理由。"},
+    {"category":"行政与管理","use_case":"活动报名与人数预测","description":"结合历史数据和本次报名情况，预测活动的最终出席人数，以便准备物资。","prompt":"我们正在举办「夫妻关系」讲座，目前已有80人报名。根据以往同类讲座平均30%的报名未出席率，请预测本次讲座的实际出席人数区间，并建议我们需要准备多少份材料。"},
+    {"category":"行政与管理","use_case":"会议语音转写与纪要","description":"AI即时将会议语音转为文字，并在会后自动生成摘要、待办事项与决议清单。","prompt":"请将这段60分钟的同工会议录音转为文字稿。完成后，请生成一份摘要，列出所有决议事项，以及每项决议的负责人与完成期限(To-do List)。"},
+    {"category":"行政与管理","use_case":"采购比价与清单生成","description":"当需要采购办公用品或活动物资时，AI能在淘宝、京东等平台进行比价，并生成采购建议。","prompt":"我们需要为儿童夏令营采购100份手工材料包，预算在15元/份以内。请在淘宝和拼多多上搜索符合条件的商品，找出3家信誉好、价格合适的店铺，并以表格形式对比其价格、材料内容和用户评价。"},
+    {"category":"行政与管理","use_case":"智能排班系统","description":"为主日服事、祷告会等，根据规则与个人偏好，自动生成公平、合理的排班表。","prompt":"请为下个月的敬拜团排班。团队共8人（4名主唱，2名吉他，1名键盘，1名鼓手），每周需4人服事（2主唱，1吉他，1键盘/鼓手轮换）。规则：1. 每人最多服事2次。2. 主唱A和B尽量不要排在一起。请生成一份四周的排班表。"},
+    {"category":"行政与管理","use_case":"财务报表初步生成","description":"自动将收支流水账（Excel），初步生成符合内部规范的月度、季度财务报表草稿。","prompt":"请根据我上传的7月份收支流水账Excel文件，自动生成一份教会月度财务报表草稿，包含总收入、总支出、各项收支明细分类汇总，以及期末结余。"},
+    {"category":"行政与管理","use_case":"年度事工计划草拟","description":"根据去年的总结和今年的异象，协助草拟新一年的年度事工计划框架。","prompt":"我们教会今年的主题是「扎根与成长」。请根据这个主题，并参考去年的事工总结报告，为今年的「门徒培训」和「社区服务」两个部门，草拟一份年度事工计划框架，包含主要目标、关键举措和衡量指标。"},
+    {"category":"行政与管理","use_case":"义工管理与激励体系设计","description":"设计一套包含招募、培训、激励和评估在内的义工管理体系方案。","prompt":"请为我们的教会设计一套义工管理与激励体系。方案需包含：1. 线上招募流程；2. 新义工培训大纲；3. 三种非物质激励方法（如：公开表彰、专属培训、团建活动）；4. 一年一度的义工评估问卷。"},
+    {"category":"行政与管理","use_case":"活动风险评估与预案","description":"针对大型活动（如夏令营、户外崇拜），进行风险评估并制定应急预案。","prompt":"我们计划在郊野公园举办一次300人的户外崇拜。请进行风险评估，至少识别出5个潜在风险（如：天气突变、人员中暑、交通问题），并为每个风险制定相应的应急预案（SOP）。"},
+    {"category":"行政与管理","use_case":"匿名意见箱（线上）智能分析","description":"对线上收集到的匿名意见和建议进行分类、情感分析和主题提炼。","prompt":"分析这个「牧者信箱」收集到的50条匿名留言。请将它们分为「教会行政」、「讲道内容」、「人际关系」、「个人困扰」等类别，分析其中的正面和负面情绪，并总结出三个最需要关注和回应的主题。"},
+    {"category":"行政与管理","use_case":"资产与物料盘点自动化","description":"通过拍照识别或扫码，自动盘点和登记教会的固定资产和消耗性物料。","prompt":"我上传了10张教会仓库储物架的照片。请识别照片中的物品（如：打印纸、椅子、音响线），并列出一份盘点清单草稿。"},
+    {"category":"行政与管理","use_case":"工作流程（SOP）创建与优化","description":"为教会的常规工作（如：新人接待、报销流程、场地申请）创建或优化标准操作流程。","prompt":"为教会的「访客接待」创建一个标准操作流程（SOP）。流程需从访客进门开始，到留下联系方式结束，包含每个环节的负责人、标准话术和注意事项。"},
+    {"category":"行政与管理","use_case":"会议效率提升助手","description":"在会议前，AI帮助分发材料、收集议程建议；会议后，自动追踪任务完成情况。","prompt":"下周一要开同工例会。请根据我提供的议程草案，向所有与会者发送会前通知邮件，并提醒他们在周五前提交需要讨论的其他议题。"},
+    {"category":"行政与管理","use_case":"内部知识库搭建","description":"将教会所有的规章制度、培训材料、事工表格等文件，整理成一个易于搜索的内部知识库。","prompt":"我将上传教会的各类文件（Word, PDF）。请你将它们全部索引，并创建一个智能知识库。当我提问「如何申请活动场地？」时，你能直接找到并展示相关的申请表格和流程说明文件。"},
+    {"category":"行政与管理","use_case":"财务预算草案生成","description":"根据往年支出和新年计划，AI自动生成下一年度的财务预算草案。","prompt":"请根据我们教会过去三年的财务报表，以及明年的事工计划（预计增加青年事工和场地维修开支），生成一份2026年度的财务预算草案，并对各项支出的增减做出初步的说明。"},
+    {"category":"行政与管理","use_case":"义工流失风险预警","description":"通过分析义工的参与度、满意度反馈等数据，预警可能流失的义工。","prompt":"分析义工考勤表和年度满意度问卷。请识别出参与度持续下降，且满意度较低的义工，将其列为一个「高流失风险」名单，以便牧者进行特别的沟通和关怀。"},
+    {"category":"行政与管理","use_case":"活动场地布局设计","description":"为特定活动（如婚礼、音乐会、长桌宴），提供场地桌椅、舞台、设备等的布局建议图。","prompt":"我们要在主堂举办一个80人的长桌晚宴。主堂尺寸是15米x25米。请设计一个合理的长桌布局方案，需要考虑上菜通道、舞台区域和入口空间。请生成一个俯瞰布局草图。"},
+    {"category":"行政与管理","use_case":"法律文件初步审查","description":"协助初步审查合同、协议等法律文件，识别其中的潜在风险点（非正式法律意见）。","prompt":"请初步审查这份「场地租赁合同」。帮我检查其中关于「责任界定」、「费用支付」和「提前解约」的条款，看是否存在明显不合理或有风险的地方。"},
+    // 81-100 社区服务与外展
+    {"category":"社区服务与外展","use_case":"社区需求分析与洞察","description":"分析本地（如广州天河区）的公开数据或新闻，识别社区的特定需求，以规划服务方向。","prompt":"分析近期关于「广州市流动儿童教育」的新闻报道和政策文件，总结出该群体目前面临的三大主要困境，并为教会提出两项可行的社区服务切入点（例如：周末作业辅导、兴趣班）。"},
+    {"category":"社区服务与外展","use_case":"公益活动文案撰写","description":"为社区服务活动（如环保、敬老、助学）撰写能在微信群和公众号发布的招募或宣传文案。","prompt":"我们计划在重阳节举办一次「爱在金秋」的社区敬老活动，需要招募20名义工。请撰写一则微信公众号推文，内容要感人、有号召力，详细说明活动内容、义工要求和报名方式。"},
+    {"category":"社区服务与外展","use_case":"寻找社区合作伙伴","description":"AI在百度地图或高德地图上，搜索并整理出教会周边的潜在合作机构。","prompt":"请在百度地图上，搜索并整理出我们教会（地址：北京市朝阳区xx路）周边3公里内所有的「社区服务中心」、「街道办事处」和「养老院」的名单，包含名称、地址和联系电话（若有），作为潜在的社区服务合作伙伴。"},
+    {"category":"社区服务与外展","use_case":"微信文章传播效果分析","description":"分析公众号文章的阅读、分享、点赞数据，为未来的内容策略提供优化建议。","prompt":"分析我们公众号过去三个月所有文章的数据（阅读量、分享数、在看数、留言数）。请找出阅读量最高的3篇文章，分析它们的共同特点（如主题、标题、排版），并为我们下一阶段的内容方向提出三条具体建议。"},
+    {"category":"社区服务与外展","use_case":"社区服务地图绘制","description":"将教会的社区服务点、关怀家庭分布等信息，在地图上进行可视化标注。","prompt":"请根据这份包含地址的Excel表格（内容为我们教会的「爱心午餐」派发点），使用百度地图API或类似工具，生成一张服务点分布图，以便我们评估服务覆盖范围。"},
+    {"category":"社区服务与外展","use_case":"法律法规智能咨询","description":"针对宗教事务、非营利组织注册、公益活动举办等，提供初步的法律法规信息参考。","prompt":"我想了解在中国大陆举办一个面向社区的、带有文化交流性质的公开活动，需要注意哪些宗教事务条例方面的规定？请提供一个初步的、基于公开信息的概述和关键注意事项。"},
+    {"category":"社区服务与外展","use_case":"跨文化资料研究","description":"为预备去少数民族地区或海外服事的同工，快速整理当地的文化、习俗、禁忌与宗教概况。","prompt":"我预备前往云南某少数民族地区进行文化交流。请提供一份关于该民族（例如：傈僳族）的文化背景报告，包含：1. 传统习俗与节期；2. 社交礼仪与禁忌；3. 主要的宗教信仰；4. 与当地人建立信任关系的建议。"},
+    {"category":"社区服务与外展","use_case":"线上慕道友跟进辅助","description":"AI根据慕道友在线上提出的问题，自动为其匹配合适的跟进材料或解答资源。","prompt":"一位慕道友在线上提问：「我很难相信一位看不见的神」。请为跟进的同工提供一个回答思路，并推荐两篇相关的护教文章和一个讲述个人经历的视频见证。"},
+    {"category":"社区服务与外展","use_case":"社交媒体舆情监测","description":"监测主流社交平台（如微博、知乎）上关于基督教或教会的公开讨论，了解社会看法。","prompt":"监测过去一个月在知乎上，关于「基督徒」或「教会生活」等话题下的高赞回答。请摘要出三种主流的正面或负面看法，并分析其背后的原因。"},
+    {"category":"社区服务与外展","use_case":"生命成长卡片设计","description":"设计适合在微信中转发的「生命成长」或「心灵关怀」卡片，内容温和、普适。","prompt":"设计一套五张的「心灵呼吸」微信卡片。每张卡片包含一句来自圣经或圣徒名言的智慧话语，并配上一张宁静的自然风景图。主题分别为：「安息」、「交托」、「感恩」、「盼望」、「爱」。文案要普适，能被非信徒接受。"},
+    {"category":"社区服务与外展","use_case":"公益项目方案书草拟","description":"协助撰写一份结构完整、逻辑清晰的社区公益项目方案书。","prompt":"请为我们的「「星光」流动儿童艺术启蒙计划」撰写一份项目方案书草案。内容需包括：项目背景、目标、服务对象、活动内容、执行计划、预算概算和预期成果。"},
+    {"category":"社区服务与外展","use_case":"本地社区论坛热点分析","description":"分析本地社区论坛（如地方性的百度贴吧、业主群信息），洞察居民关心的话题和痛点。","prompt":"分析「北京望京」百度贴吧和本地生活论坛过去三个月的帖子。请总结出居民最关心的三大生活议题（例如：子女入学、交通拥堵、垃圾分类），以便我们思考如何以社区服务回应这些关切。"},
+    {"category":"社区服务与外展","use_case":"合作意向书（LOI）草拟","description":"为与其它NPO或社区机构合作，草拟一份初步的合作意向书。","prompt":"我们计划与本地的「爱家社工服务中心」合作开展家庭关系讲座。请草拟一份合作意向书，说明我们的合作愿景、各自可以提供的资源以及建议的合作模式。"},
+    {"category":"社区服务与外展","use_case":"公益活动义工招募文案（针对特定技能）","description":"撰写能吸引具备特定技能（如：设计、摄影、心理咨询）义工的招募文案。","prompt":"我们需要为「「心晴」热线」项目招募3名有心理咨询背景的接线义工。请撰写一则招募文案，强调该服事的价值、对专业能力的要求以及我们将提供的支持与培训。"},
+    {"category":"社区服务与外展","use_case":"社区服务影响力故事挖掘","description":"通过分析活动反馈和访谈记录，挖掘能体现服务影响力的个人故事。","prompt":"分析这次「长者智能手机学习班」的学员反馈表和义工访谈记录。请从中挖掘一个最感人的故事，并将其改写成一篇500字的短文，用以在内部通讯中分享，激励更多人参与社区服务。"},
+    {"category":"社区服务与外展","use_case":"公益创投/众筹文案撰写","description":"为计划在腾讯公益等平台发起的项目，撰写具有说服力和情感穿透力的众筹文案。","prompt":"请为「大山里孩子的音乐教室」项目，撰写一篇500字的腾讯公益平台众筹文案。文案需要包含一个真实的故事、清晰的项目目标、具体的资金用途说明和有力的捐款呼吁。"},
+    {"category":"社区服务与外展","use_case":"媒体邀请函与新闻稿草拟","description":"为大型社区活动，撰写发送给本地媒体或社区公众号的邀请函与新闻稿。","prompt":"我们即将举办「百家邻里节」社区文化活动。请草拟一份致本地社区媒体的邀请函和一份活动结束后可发布的新闻稿，突出活动的社区融合意义和精彩瞬间。"},
+    {"category":"社区服务与外展","use_case":"服务对象回访问卷设计","description":"为接受过服务的社区居民设计回访问卷，以了解服务的长期效果和可改进之处。","prompt":"为接受过我们「一对一作业辅导」服务半年以上的孩子和家长，设计一份线上回访问卷。问卷需评估服务对孩子学业、自信心和品格成长的长期影响。"},
+    {"category":"社区服务与外展","use_case":"政策研究与解读","description":"追踪与社区服务（如养老、助残、未成年人保护）相关的最新政策，并进行解读。","prompt":"解读最新出台的《中华人民共和国未成年人保护法》中，关于「社会保护」的章节。请摘要出社区组织（如我们）可以参与和发挥作用的3个关键点。"},
+    {"category":"社区服务与外展","use_case":"年度社区服务报告生成","description":"将全年的社区服务数据、活动记录、财务支出和影响力故事，整合成一份图文并茂的年度报告。","prompt":"请根据我提供的全年社区服务数据（Excel）、活动照片和故事文稿，生成一份「2025年度社区服务影响力报告」的PPT大纲。大纲需包含数据总览、重点项目回顾、感人故事分享和未来展望等章节。"}
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('useCasesContainer');
+    const filterContainer = document.getElementById('filterContainer');
+    const searchInput = document.getElementById('searchInput');
+    const noResultsMessage = document.getElementById('noResultsMessage');
+
+    const categories = ['全部', ...new Set(useCases.map(item => item.category))];
+    let activeFilter = '全部';
+
+    // 1. Create Filter Buttons
+    filterContainer.innerHTML = categories.map(category => `
+        <button 
+            class="filter-btn px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200 ${category === '全部' ? 'bg-sky-600 text-white shadow' : 'bg-white text-gray-700 hover:bg-gray-100 border'}" 
+            data-category="${category}">
+            ${category}
+        </button>
+    `).join('');
+    
+    // 2. Render Cards
+    const renderCards = (filteredCases) => {
+        container.innerHTML = ''; // Clear existing cards
+        if (filteredCases.length === 0) {
+            noResultsMessage.classList.remove('hidden');
+        } else {
+            noResultsMessage.classList.add('hidden');
+        }
+        filteredCases.forEach((uc, index) => {
+            const card = document.createElement('div');
+            card.className = 'use-case-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col';
+            card.dataset.id = index;
+
+            card.innerHTML = `
+                <div class="p-6 flex-grow">
+                    <p class="text-xs font-semibold text-sky-500 uppercase tracking-wide">${uc.category}</p>
+                    <h3 class="text-xl font-bold text-gray-900 mt-1">${uc.use_case}</h3>
+                    <p class="text-gray-600 mt-2 text-sm">${uc.description}</p>
+                </div>
+                <div class="px-6 pb-4">
+                    <div class="prompt-container hidden bg-gray-100 p-4 rounded-lg mt-4">
+                        <p class="text-sm font-bold text-gray-700 mb-2">提示词范本:</p>
+                        <code class="prompt-code text-sm text-gray-800">${uc.prompt}</code>
+                        <div class="mt-4 text-right">
+                            <a href="#" class="ai-output-link text-sm font-medium text-sky-600 hover:text-sky-800 transition-colors" data-usecase="${uc.use_case}">
+                                查看AI输出范例 &rarr;
+                            </a>
+                        </div>
+                    </div>
+                    <button class="toggle-prompt-btn mt-4 w-full text-center px-4 py-2 bg-sky-100 text-sky-700 text-sm font-medium rounded-lg hover:bg-sky-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors">
+                        显示提示词范本
+                    </button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    };
+    
+    // 3. Filter and Search Logic
+    const filterAndSearch = () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        const filteredCases = useCases.filter(uc => {
+            const inCategory = activeFilter === '全部' || uc.category === activeFilter;
+            const inSearch = searchTerm === '' || 
+                             uc.use_case.toLowerCase().includes(searchTerm) ||
+                             uc.description.toLowerCase().includes(searchTerm) ||
+                             uc.category.toLowerCase().includes(searchTerm) ||
+                             uc.prompt.toLowerCase().includes(searchTerm);
+            return inCategory && inSearch;
+        });
+        
+        renderCards(filteredCases);
+    };
+
+    // 4. Event Listeners
+    filterContainer.addEventListener('click', (e) => {
+        if (e.target.tagName === 'BUTTON') {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-sky-600', 'text-white', 'shadow');
+                btn.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100');
+            });
+            e.target.classList.add('bg-sky-600', 'text-white', 'shadow');
+            e.target.classList.remove('bg-white', 'text-gray-700', 'hover:bg-gray-100');
+            
+            activeFilter = e.target.dataset.category;
+            filterAndSearch();
+        }
+    });
+
+    searchInput.addEventListener('input', filterAndSearch);
+
+    const modal = document.getElementById('aiOutputModal');
+    const modalContent = document.getElementById('modalContent');
+    const modalUseCase = document.getElementById('modalUseCase');
+    const modalBody = document.getElementById('modalBody');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const closeModalBtnFooter = document.getElementById('closeModalBtnFooter');
+
+    function openModal() {
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            if (modalContent) {
+                modalContent.classList.remove('scale-95');
+            }
+        }, 10);
+    }
+
+    function closeModal() {
+        modal.classList.add('opacity-0');
+        if (modalContent) {
+            modalContent.classList.add('scale-95');
+        }
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300); // match transition duration
+    }
+    
+    container.addEventListener('click', e => {
+        // Toggle prompt display
+        if (e.target.classList.contains('toggle-prompt-btn')) {
+            const button = e.target;
+            const promptContainer = button.previousElementSibling;
+            
+            const isHidden = promptContainer.classList.contains('hidden');
+            if (isHidden) {
+                promptContainer.classList.remove('hidden');
+                button.textContent = '隐藏提示词范本';
+            } else {
+                promptContainer.classList.add('hidden');
+                button.textContent = '显示提示词范本';
+            }
+        }
+
+        // Show AI output modal
+        const link = e.target.closest('.ai-output-link');
+        if (link) {
+            e.preventDefault();
+            const useCaseName = link.dataset.usecase;
+
+            // Sanitize the filename to match the Python script's logic.
+            // It keeps Unicode letters/numbers, spaces, dots, and underscores, then trims trailing whitespace.
+            const safeFilename = useCaseName.replace(/[^\p{L}\p{N} ._]/gu, '').trimEnd();
+            
+            modalUseCase.textContent = useCaseName;
+            modalBody.innerHTML = '<p class="text-center text-gray-500">加载中...</p>';
+            openModal();
+
+            const markdownUrl = `./assests/AIResponses/${encodeURIComponent(safeFilename)}.md`;
+
+            fetch(markdownUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`File not found or network error for ${safeFilename}.md`);
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    if (window.marked) {
+                        modalBody.innerHTML = marked.parse(text);
+                    } else {
+                        // Fallback to preformatted text if marked.js is not available
+                        modalBody.innerHTML = `<pre style="white-space: pre-wrap; word-wrap: break-word;">${text}</pre>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching AI response:', error);
+                    modalBody.innerHTML = '<p class="text-center text-red-500">抱歉，加载范例输出时出错。该案例可能暂无输出范例。</p>';
+                });
+        }
+    });
+
+    closeModalBtn.addEventListener('click', closeModal);
+    closeModalBtnFooter.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+
+    // Initial Render
+    filterAndSearch();
+});
+
+</script>
+
+</body>
+</html>
