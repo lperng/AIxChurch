@@ -10,3 +10,4 @@
 .env.production.local
 *.py
 *.log
+venv/
