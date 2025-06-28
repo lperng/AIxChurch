@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is AI a Blessing or a Curse for Church Ministry?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #955196, #003F5C);
+            background-attachment: fixed;
+        }
+        #language-switcher {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+        }
+        #language-switcher select {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-weight: bold;
+        }
+         #language-switcher option {
+            background-color: #003F5C;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+
+    <div id="language-switcher">
+        <select id="lang-select">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="zh-cn">简体中文</option>
+            <option value="zh-tw">繁體中文</option>
+        </select>
+    </div>
+
+    <div id="content-container" class="w-full">
+        <!-- Content will be loaded here -->
+    </div>
+
+    <script>
+        const supportedLangs = {
+            'en': 'English',
+            'ja': '日本語',
+            'zh-cn': '简体中文',
+            'zh-tw': '繁體中文'
+        };
+
+        const contentContainer = document.getElementById('content-container');
+        const langSelect = document.getElementById('lang-select');
+
+        async function loadContent(lang) {
+            const path = `${lang}/outline.html`;
+            try {
+                const response = await fetch(path);
+                if (!response.ok) {
+                    throw new Error(`Could not load ${path}`);
+                }
+                const text = await response.text();
+                
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+                const bodyContent = doc.body.innerHTML;
+
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = bodyContent;
+
+                const links = tempDiv.querySelectorAll('a');
+                links.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (href && !href.startsWith('http')) {
+                        link.setAttribute('href', `${lang}/${href}`);
+                    }
+                });
+
+                contentContainer.innerHTML = tempDiv.innerHTML;
+                document.documentElement.lang = lang;
+                langSelect.value = lang;
+                
+            } catch (error) {
+                console.error('Error loading content:', error);
+                if (lang !== 'en') {
+                    console.log('Falling back to English.');
+                    loadContent('en');
+                } else {
+                    contentContainer.innerHTML = `<div class="text-white text-center"><h1>Error</h1><p>Could not load content.</p></div>`;
+                }
+            }
+        }
+
+        function getInitialLang() {
+            const browserLang = navigator.language.toLowerCase();
+            if (browserLang.startsWith('zh-cn')) {
+                return 'zh-cn';
+            }
+            if (browserLang.startsWith('zh-tw') || browserLang.startsWith('zh-hk')) {
+                return 'zh-tw';
+            }
+            if (browserLang.startsWith('ja')) {
+                return 'ja';
+            }
+            if (browserLang.startsWith('en')) {
+                return 'en';
+            }
+
+            for(const lang of navigator.languages) {
+                const lowerLang = lang.toLowerCase();
+                 if (lowerLang.startsWith('zh-cn')) {
+                    return 'zh-cn';
+                }
+                if (lowerLang.startsWith('zh-tw') || lowerLang.startsWith('zh-hk')) {
+                    return 'zh-tw';
+                }
+                if (lowerLang.startsWith('ja')) {
+                    return 'ja';
+                }
+                if (lowerLang.startsWith('en')) {
+                    return 'en';
+                }
+            }
+
+            return 'en'; 
+        }
+
+        langSelect.addEventListener('change', (event) => {
+            loadContent(event.target.value);
+        });
+
+        const initialLang = getInitialLang();
+        loadContent(initialLang);
+
+    </script>
+
+</body>
+</html> 

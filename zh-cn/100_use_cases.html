@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI赋能牧养与社区服务之百大案例</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -30,6 +31,15 @@
             padding: 0;
             border: none;
         }
+        .markdown-content h3 { font-size: 1.25rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;}
+        .markdown-content p { margin-bottom: 1rem; line-height: 1.75; }
+        .markdown-content ul { list-style-type: disc; padding-left: 2rem; margin-bottom: 1rem; }
+        .markdown-content ol { list-style-type: decimal; padding-left: 2rem; margin-bottom: 1rem; }
+        .markdown-content li { margin-bottom: 0.5rem; }
+        .markdown-content pre { background-color: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 1rem; white-space: pre-wrap; word-wrap: break-word; }
+        .markdown-content code { background-color: #e5e7eb; padding: 0.2em 0.4em; border-radius: 0.3em; font-family: monospace; }
+        .markdown-content pre > code { background-color: transparent; padding: 0; }
+        .markdown-content blockquote { border-left: 4px solid #d1d5db; padding-left: 1rem; margin-left: 0; font-style: italic; color: #4b5563; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -73,6 +83,25 @@
         </div>
     </div>
     
+    <!-- Modal for AI Output -->
+    <div id="aiOutputModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300 ease-in-out">
+        <div id="modalContent" class="bg-white rounded-xl shadow-2xl p-6 md:p-8 max-w-2xl w-full mx-4 transform transition-transform duration-300 ease-in-out scale-95">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">AI 输出范例</h3>
+                    <p id="modalUseCase" class="text-sm text-gray-500 mt-1"></p>
+                </div>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600 text-4xl font-light leading-none -mt-2 -mr-2">&times;</button>
+            </div>
+            <div id="modalBody" class="markdown-content text-base text-gray-700 leading-relaxed max-h-[60vh] overflow-y-auto pr-4">
+                <!-- AI output content will go here -->
+            </div>
+            <div class="mt-6 text-right">
+                <button id="closeModalBtnFooter" class="px-5 py-2 bg-sky-600 text-white rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors">关闭</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="text-center py-6 mt-8 bg-gray-100">
         <p class="text-gray-500 text-sm">&copy; 2025 AI赋能资源库. 专为牧者与同工设计.</p>
     </footer>
@@ -227,6 +256,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="prompt-container hidden bg-gray-100 p-4 rounded-lg mt-4">
                         <p class="text-sm font-bold text-gray-700 mb-2">提示词范本:</p>
                         <code class="prompt-code text-sm text-gray-800">${uc.prompt}</code>
+                        <div class="mt-4 text-right">
+                            <a href="#" class="ai-output-link text-sm font-medium text-sky-600 hover:text-sky-800 transition-colors" data-usecase="${uc.use_case}">
+                                查看AI输出范例 &rarr;
+                            </a>
+                        </div>
                     </div>
                     <button class="toggle-prompt-btn mt-4 w-full text-center px-4 py-2 bg-sky-100 text-sky-700 text-sm font-medium rounded-lg hover:bg-sky-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors">
                         显示提示词范本
@@ -271,7 +305,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     searchInput.addEventListener('input', filterAndSearch);
 
+    const modal = document.getElementById('aiOutputModal');
+    const modalContent = document.getElementById('modalContent');
+    const modalUseCase = document.getElementById('modalUseCase');
+    const modalBody = document.getElementById('modalBody');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const closeModalBtnFooter = document.getElementById('closeModalBtnFooter');
+
+    function openModal() {
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            if (modalContent) {
+                modalContent.classList.remove('scale-95');
+            }
+        }, 10);
+    }
+
+    function closeModal() {
+        modal.classList.add('opacity-0');
+        if (modalContent) {
+            modalContent.classList.add('scale-95');
+        }
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300); // match transition duration
+    }
+    
     container.addEventListener('click', e => {
+        // Toggle prompt display
         if (e.target.classList.contains('toggle-prompt-btn')) {
             const button = e.target;
             const promptContainer = button.previousElementSibling;
@@ -284,6 +346,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 promptContainer.classList.add('hidden');
                 button.textContent = '显示提示词范本';
             }
+        }
+
+        // Show AI output modal
+        const link = e.target.closest('.ai-output-link');
+        if (link) {
+            e.preventDefault();
+            const useCaseName = link.dataset.usecase;
+
+            // Sanitize the filename to match the Python script's logic.
+            // It keeps Unicode letters/numbers, spaces, dots, and underscores, then trims trailing whitespace.
+            const safeFilename = useCaseName.replace(/[^\p{L}\p{N} ._]/gu, '').trimEnd();
+            
+            modalUseCase.textContent = useCaseName;
+            modalBody.innerHTML = '<p class="text-center text-gray-500">加载中...</p>';
+            openModal();
+
+            const markdownUrl = `../assests/AIResponses/${encodeURIComponent(safeFilename)}.md`;
+
+            fetch(markdownUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`File not found or network error for ${safeFilename}.md`);
+                    }
+                    return response.text();
+                })
+                .then(text => {
+                    if (window.marked) {
+                        modalBody.innerHTML = marked.parse(text);
+                    } else {
+                        // Fallback to preformatted text if marked.js is not available
+                        modalBody.innerHTML = `<pre style="white-space: pre-wrap; word-wrap: break-word;">${text}</pre>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching AI response:', error);
+                    modalBody.innerHTML = '<p class="text-center text-red-500">抱歉，加载范例输出时出错。该案例可能暂无输出范例。</p>';
+                });
+        }
+    });
+
+    closeModalBtn.addEventListener('click', closeModal);
+    closeModalBtnFooter.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            closeModal();
         }
     });
 
